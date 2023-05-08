@@ -3,10 +3,13 @@
 
 int get_index_of(const int numbers[], const size_t element_count, const int num)
 {
-	size_t cnt;
+	size_t cnt = 0;
 
-	for (cnt = 0; cnt < element_count; cnt++)
+	for (; cnt < element_count; cnt++)
 	{
+		if (numbers[cnt] == INT_MIN)
+			return -1;
+
 		if (numbers[cnt] == num)
 			return cnt;
 	}
@@ -16,14 +19,18 @@ int get_index_of(const int numbers[], const size_t element_count, const int num)
 
 int get_last_index_of(const int numbers[], const size_t element_count, const int num)
 {
-	size_t cnt = element_count - 1;
-	for (; cnt >= 0; cnt--)
+	size_t cnt = 0;
+	int result = -1;
+	for (; cnt < element_count; cnt++)
 	{
+		if (numbers[cnt] == INT_MIN)
+			return -1;
+
 		if (numbers[cnt] == num)
-			return cnt;
+			result = (int)cnt;
 	}
 
-	return -1;
+	return result;
 }
 
 int get_max_index(const int numbers[], const size_t element_count)
@@ -41,6 +48,9 @@ int get_max_index(const int numbers[], const size_t element_count)
 
 	for (; cnt < element_count; cnt++)
 	{
+		if (numbers[cnt] == INT_MIN)
+			return -1;
+
 		if (maxNum < numbers[cnt])
 		{
 			maxNum = numbers[cnt];
@@ -66,6 +76,9 @@ int get_min_index(const int numbers[], const size_t element_count)
 
 	for (; cnt < element_count; cnt++)
 	{
+		if (numbers[cnt] == INT_MIN)
+			return -1;
+
 		if (minNum > numbers[cnt])
 		{
 			minNum = numbers[cnt];
