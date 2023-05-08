@@ -3,8 +3,9 @@
 
 int get_index_of(const int numbers[], const size_t element_count, const int num)
 {
-	size_t cnt = 0;
-	for (; cnt < element_count; cnt++)
+	size_t cnt;
+
+	for (cnt = 0; cnt < element_count; cnt++)
 	{
 		if (numbers[cnt] == num)
 			return cnt;
