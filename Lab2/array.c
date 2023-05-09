@@ -3,7 +3,7 @@
 
 int get_index_of(const int numbers[], const size_t element_count, const int num)
 {
-    size_t cnt = 0;
+	size_t cnt = 0;
 
 	for (; cnt < element_count; cnt++)
 	{
@@ -132,39 +132,38 @@ int has_even(const int numbers[], const size_t element_count)
 
 int insert(int numbers[], const size_t element_count, const int num, const size_t pos)
 {
-	size_t cnt;
+	int result = 0;
+	size_t cnt = element_count - 1;
 
-	if (element_count == 0 && pos == 0)
-	{
-		numbers[0] = num;
-		return 1;
-	}
-	
 	if (element_count <= 0 || pos > element_count)
-		return 0;
+		return result;
 
-	for (cnt = element_count; cnt > pos; cnt--)
+	for (; cnt >= pos; cnt--)
 	{
-		numbers[cnt] = numbers[cnt - 1];
+		numbers[cnt + 1] = numbers[cnt];
 	}
 	numbers[pos] = num;
 
-	return 1;
+	result = 1;
+	return result;
 }
 
 int remove_at(int numbers[], const size_t element_count, const size_t index)
 {
-	size_t cnt;
+	int result = 0;
+	size_t cnt = index;
 
 	if (element_count <= 0 || index >= element_count)
-		return 0;
+		return result;
 
-	for (cnt = index; cnt < element_count - 1; cnt++)
+	for (; cnt < element_count; cnt++)
 	{
 		numbers[cnt] = numbers[cnt + 1];
 	}
-	numbers[element_count - 1] = INT_MIN;
 
-	return 1;
+	numbers[cnt] = INT_MIN;
+
+	result = 1;
+	return result;
 }
 
