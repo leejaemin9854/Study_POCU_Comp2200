@@ -129,7 +129,6 @@ int place_stone(const color_t color, const unsigned int row, const unsigned int 
 {
 	if (is_placeable(row, col) == 0 || (color != COLOR_BLACK && color != COLOR_WHITE))
 	{
-		printf("Return 0;\n");
 		return 0;
 	}
 
@@ -148,7 +147,7 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
 	int result = 0;
 	int add_score;
 
-	unsigned int row_pos, col_pos, cnt;
+	unsigned int row_pos, col_pos;
 
 	/* row line check */
 	row_pos = row;
