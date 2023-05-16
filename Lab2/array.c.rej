@@ -1,0 +1,65 @@
+diff a/Lab2/array.c b/Lab2/array.c	(rejected hunks)
+@@ -3,7 +3,7 @@
+ 
+ int get_index_of(const int numbers[], const size_t element_count, const int num)
+ {
+-	size_t cnt = 0;
++    size_t cnt = 0;
+ 
+ 	for (; cnt < element_count; cnt++)
+ 	{
+@@ -132,38 +132,39 @@
+ 
+ int insert(int numbers[], const size_t element_count, const int num, const size_t pos)
+ {
+-	int result = 0;
+-	size_t cnt = element_count - 1;
++	size_t cnt;
+ 
++	if (element_count == 0 && pos == 0)
++	{
++		numbers[0] = num;
++		return 1;
++	}
++	
+ 	if (element_count <= 0 || pos > element_count)
+-		return result;
++		return 0;
+ 
+-	for (; cnt >= pos; cnt--)
++	for (cnt = element_count; cnt > pos; cnt--)
+ 	{
+-		numbers[cnt + 1] = numbers[cnt];
++		numbers[cnt] = numbers[cnt - 1];
+ 	}
+ 	numbers[pos] = num;
+ 
+-	result = 1;
+-	return result;
++	return 1;
+ }
+ 
+ int remove_at(int numbers[], const size_t element_count, const size_t index)
+ {
+-	int result = 0;
+-	size_t cnt = index;
++	size_t cnt;
+ 
+ 	if (element_count <= 0 || index >= element_count)
+-		return result;
++		return 0;
+ 
+-	for (; cnt < element_count; cnt++)
++	for (cnt = index; cnt < element_count - 1; cnt++)
+ 	{
+ 		numbers[cnt] = numbers[cnt + 1];
+ 	}
++	numbers[element_count - 1] = INT_MIN;
+ 
+-	numbers[cnt] = INT_MIN;
+-
+-	result = 1;
+-	return result;
++	return 1;
+ }
+ 
