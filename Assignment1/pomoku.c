@@ -12,40 +12,6 @@ int g_score_BLACK;
 int g_score_WHITE;
 
 
-void show(void)
-{
-	int i, j;
-	int place;
-
-	char sign_stone[4] = { '_','|','B','W' };
-
-	printf("\n\t ");
-	for (i = 0; i < MAX_SIZE; i++)
-		printf(" %d ", i % 10);
-	printf("\n\n");
-
-	for (i = 0; i < MAX_SIZE; i++) {
-		printf("%d\t[", i);
-		for (j = 0; j < MAX_SIZE; j++) {
-			place = g_board[i][j];
-
-			if (place == INT_MIN)
-				printf(" %c ", sign_stone[0]);
-			else if (place == COLOR_NONE)
-				printf(" %c ", sign_stone[1]);
-			else if (place == COLOR_BLACK)
-				printf(" %c ", sign_stone[2]);
-			else if (place == COLOR_WHITE)
-				printf(" %c ", sign_stone[3]);
-
-		}
-		printf("]\n");
-	}
-
-	printf("\n");
-}
-
-
 void init_game(void)
 {
 	unsigned int i;

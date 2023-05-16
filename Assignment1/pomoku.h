@@ -3,7 +3,6 @@
 
 #include "color.h"
 
-void show(void);
 
 #define TRUE 1
 #define FALSE 0
