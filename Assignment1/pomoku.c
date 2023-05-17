@@ -11,7 +11,6 @@ unsigned int g_colume;
 int g_score_BLACK;
 int g_score_WHITE;
 
-
 void init_game(void)
 {
 	unsigned int i;
@@ -541,13 +540,10 @@ int copy_column(const color_t color, const unsigned int src, const unsigned int 
 		g_score_WHITE -= COST_COPY;
 	}
 
-	for (i = 0; i < g_colume; i++) {
-		g_board[dst][i] = g_board[src][i];
-	}
-
 	for (i = 0; i < g_row; i++) {
 		g_board[i][dst] = g_board[i][src];
 	}
 
 	return 1;
 }
+
