@@ -24,11 +24,11 @@ unsigned int get_column_count(void);
 
 int get_score(const color_t color);
 
-int spend_score(const color_t color, const int amount);
-
 int get_color(const unsigned int row, const unsigned int col);
 
 int is_placeable(const unsigned int row, const unsigned int col);
+
+int is_color(const color_t color);
 
 int place_stone(const color_t color, const unsigned int row, const unsigned int col);
 
