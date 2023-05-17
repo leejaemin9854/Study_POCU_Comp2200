@@ -338,7 +338,7 @@ int remove_row(const color_t color, const unsigned int row)
 	unsigned int i;
 	size_t j;
 
-	if (g_row == MIN_SIZE || row > g_row)
+	if (g_row == MIN_SIZE || row >= g_row)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
@@ -377,7 +377,7 @@ int remove_column(const color_t color, const unsigned int col)
 	unsigned int i;
 	size_t j;
 
-	if (g_colume == MIN_SIZE || col > g_colume)
+	if (g_colume == MIN_SIZE || col >= g_colume)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;

@@ -15,6 +15,7 @@
 #define COST_SWAP 2
 #define COST_COPY 4
 
+
 void init_game(void);
 
 unsigned int get_row_count(void);
