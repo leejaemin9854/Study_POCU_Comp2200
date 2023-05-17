@@ -260,11 +260,22 @@ int insert_row(const color_t color, const unsigned int row)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
-	if ((color == COLOR_BLACK ? g_score_BLACK : g_score_WHITE) < COST_INSERT)
-		return 0;
+	if (color == COLOR_BLACK)
+	{
+		if (g_score_BLACK < COST_INSERT)
+			return 0;
+
+		g_score_BLACK -= COST_INSERT;
+	}
+	else
+	{
+		if (g_score_WHITE < COST_INSERT)
+			return 0;
+
+		g_score_WHITE -= COST_INSERT;
+	}
 
 	g_row++;
-	(color == COLOR_BLACK ? g_score_BLACK : g_score_WHITE) -= COST_INSERT;
 	
 
 	for (i = 2; i <= g_row - row; i++) {
@@ -290,11 +301,22 @@ int insert_column(const color_t color, const unsigned int col)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
-	if ((color == COLOR_BLACK ? g_score_BLACK : g_score_WHITE) < COST_INSERT)
-		return 0;
+	if (color == COLOR_BLACK)
+	{
+		if (g_score_BLACK < COST_INSERT)
+			return 0;
+
+		g_score_BLACK -= COST_INSERT;
+	}
+	else
+	{
+		if (g_score_WHITE < COST_INSERT)
+			return 0;
+
+		g_score_WHITE -= COST_INSERT;
+	}
 
 	g_colume++;
-	(color == COLOR_BLACK ? g_score_BLACK : g_score_WHITE) -= COST_INSERT;
 
 
 	for (i = 2; i <= g_colume - col; i++) {
