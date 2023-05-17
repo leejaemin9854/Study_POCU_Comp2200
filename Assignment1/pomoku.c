@@ -122,9 +122,12 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
 
 		row_pos--;
 	}
-	add_score = 0;
-	while (row_pos < g_row) {
-		if (g_board[row_pos][col] != color)
+	add_score = 1;
+	while (1) {
+		if (row_pos >= g_row)
+			break;
+
+		if (g_board[row_pos + 1][col] != color)
 			break;
 
 		row_pos++;
@@ -132,7 +135,7 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
 	}
 	add_score = add_score >= 5 ? add_score - 4 : 0;
 	result += add_score;
-
+	
 
 	/* colume line check */
 	col_pos = col;
@@ -145,9 +148,12 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
 
 		col_pos--;
 	}
-	add_score = 0;
-	while (col_pos < g_colume) {
-		if (g_board[row][col_pos] != color)
+	add_score = 1;
+	while (1) {
+		if (col_pos >= g_colume)
+			break;
+
+		if (g_board[row][col_pos + 1] != color)
 			break;
 
 		col_pos++;
@@ -155,7 +161,6 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
 	}
 	add_score = add_score >= 5 ? add_score - 4 : 0;
 	result += add_score;
-
 
 	/* diagonal line check ( row++, col++) */
 	row_pos = row;
@@ -170,9 +175,12 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
 		row_pos--;
 		col_pos--;
 	}
-	add_score = 0;
-	while (row_pos < g_row && col_pos < g_colume) {
-		if (g_board[row_pos][col_pos] != color)
+	add_score = 1;
+	while (1) {
+		if (row_pos >= g_row || col_pos >= g_colume)
+			break;
+
+		if (g_board[row_pos+1][col_pos+1] != color)
 			break;
 
 		row_pos++;
@@ -196,9 +204,11 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
 		row_pos--;
 		col_pos++;
 	}
-	add_score = 0;
-	while (row_pos < g_row && col_pos>0) {
-		if (g_board[row_pos][col_pos] != color)
+	add_score = 1;
+	while (1) {
+		if (row_pos >= g_row || col_pos <= 0)
+			break;
+		if (g_board[row_pos + 1][col_pos - 1] != color)
 			break;
 
 		row_pos++;
