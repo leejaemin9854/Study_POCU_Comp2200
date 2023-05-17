@@ -255,8 +255,9 @@ int insert_row(const color_t color, const unsigned int row)
 {
 	unsigned int i;
 	size_t j;
-
-	if (increase_row_count() == 0 || row < 0 || row > g_row)
+	if (row >= g_row)
+		return 0;
+	if (increase_row_count() == 0)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
@@ -282,8 +283,9 @@ int insert_column(const color_t color, const unsigned int col)
 {
 	unsigned int i;
 	size_t j;
-
-	if (increase_colume_count() == 0 || col<0 || col>g_colume)
+	if (col >= g_colume)
+		return 0;
+	if (increase_colume_count() == 0)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
