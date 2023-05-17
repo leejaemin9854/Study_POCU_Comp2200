@@ -338,12 +338,25 @@ int remove_row(const color_t color, const unsigned int row)
 	unsigned int i;
 	size_t j;
 
-	if (decrease_row_count() == 0 || row<0 || row>g_row)
+	if (g_row == MIN_SIZE || row > g_row)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
-	if (spend_score(color, COST_REMOVE) == 0)
-		return 0;
+	if (color == COLOR_BLACK)
+	{
+		if (g_score_BLACK < COST_REMOVE)
+			return 0;
+
+		g_score_BLACK -= COST_REMOVE;
+	}
+	else
+	{
+		if (g_score_WHITE < COST_REMOVE)
+			return 0;
+
+		g_score_WHITE -= COST_REMOVE;
+	}
+	g_row--;
 
 
 	for (i = row; i < g_row; i++) {
@@ -364,12 +377,25 @@ int remove_column(const color_t color, const unsigned int col)
 	unsigned int i;
 	size_t j;
 
-	if (decrease_colume_cout() == 0 || col<0 || col>g_colume)
+	if (g_colume == MIN_SIZE || col > g_colume)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
-	if (spend_score(color, COST_REMOVE) == 0)
-		return 0;
+	if (color == COLOR_BLACK)
+	{
+		if (g_score_BLACK < COST_REMOVE)
+			return 0;
+
+		g_score_BLACK -= COST_REMOVE;
+	}
+	else
+	{
+		if (g_score_WHITE < COST_REMOVE)
+			return 0;
+
+		g_score_WHITE -= COST_REMOVE;
+	}
+	g_colume--;
 
 
 	for (i = col; i < g_colume; i++) {
@@ -390,14 +416,25 @@ int swap_rows(const color_t color, const unsigned int row0, const unsigned int r
 	unsigned int i;
 	int temp[MAX_SIZE] = { COLOR_NONE, };
 
-	if (row0 < 0 || row0 >= g_row)
-		return 0;
-	if (row1 < 0 || row1 >= g_row)
+	if (row0 >= g_row || row1 >= g_row)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
-	if (spend_score(color, COST_SWAP) == 0)
-		return 0;
+	if (color == COLOR_BLACK)
+	{
+		if (g_score_BLACK < COST_SWAP)
+			return 0;
+
+		g_score_BLACK -= COST_SWAP;
+	}
+	else
+	{
+		if (g_score_WHITE < COST_SWAP)
+			return 0;
+
+		g_score_WHITE -= COST_SWAP;
+	}
+
 
 	for (i = 0; i < g_colume; i++) {
 		temp[i] = g_board[row0][i];
@@ -416,15 +453,24 @@ int swap_columns(const color_t color, const unsigned int col0, const unsigned in
 {
 	unsigned int i;
 	int temp[MAX_SIZE] = { COLOR_NONE, };
-
-	if (col0 < 0 || col0 >= g_colume)
-		return 0;
-	if (col1 < 0 || col1 >= g_colume)
+	if (col0 >= g_colume || col1 >= g_colume)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
-	if (spend_score(color, COST_SWAP) == 0)
-		return 0;
+	if (color == COLOR_BLACK)
+	{
+		if (g_score_BLACK < COST_SWAP)
+			return 0;
+
+		g_score_BLACK -= COST_SWAP;
+	}
+	else
+	{
+		if (g_score_WHITE < COST_SWAP)
+			return 0;
+
+		g_score_WHITE -= COST_SWAP;
+	}
 
 
 	for (i = 0; i < g_row; i++) {
@@ -446,14 +492,24 @@ int copy_row(const color_t color, const unsigned int src, const unsigned int dst
 {
 	unsigned int i;
 	
-	if (src < 0 || src >= g_row)
-		return 0;
-	if (dst < 0 || dst >= g_row)
+	if (src >= g_row || dst >= g_row)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
-	if (spend_score(color, COST_COPY) == 0)
-		return 0;
+	if (color == COLOR_BLACK)
+	{
+		if (g_score_BLACK < COST_COPY)
+			return 0;
+
+		g_score_BLACK -= COST_COPY;
+	}
+	else
+	{
+		if (g_score_WHITE < COST_COPY)
+			return 0;
+
+		g_score_WHITE -= COST_COPY;
+	}
 
 	for (i = 0; i < g_colume; i++) {
 		g_board[dst][i] = g_board[src][i];
@@ -466,14 +522,28 @@ int copy_column(const color_t color, const unsigned int src, const unsigned int 
 {
 	unsigned i;
 
-	if (src < 0 || src >= g_colume)
-		return 0;
-	if (dst < 0 || dst >= g_colume)
+	if (src >= g_colume || dst >= g_colume)
 		return 0;
 	if (color != COLOR_BLACK && color != COLOR_WHITE)
 		return 0;
-	if (spend_score(color, COST_COPY) == 0)
-		return 0;
+	if (color == COLOR_BLACK)
+	{
+		if (g_score_BLACK < COST_COPY)
+			return 0;
+
+		g_score_BLACK -= COST_COPY;
+	}
+	else
+	{
+		if (g_score_WHITE < COST_COPY)
+			return 0;
+
+		g_score_WHITE -= COST_COPY;
+	}
+
+	for (i = 0; i < g_colume; i++) {
+		g_board[dst][i] = g_board[src][i];
+	}
 
 	for (i = 0; i < g_row; i++) {
 		g_board[i][dst] = g_board[i][src];
