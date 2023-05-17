@@ -3,10 +3,10 @@
 
 typedef enum color {
 
-	COLOR_NONE = -1,
-	COLOR_BLACK = 0,
-	COLOR_WHITE = 1
+    COLOR_NONE = -1,
+    COLOR_BLACK = 0,
+    COLOR_WHITE = 1
 
-}color_t;
+} color_t;
 
 #endif /* COLOR_H */
