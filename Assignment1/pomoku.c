@@ -321,7 +321,7 @@ int insert_column(const color_t color, const unsigned int col)
 
 	for (i = 2; i <= g_colume - col; i++) {
 		for (j = 0; j < g_row; j++) {
-			g_board[j][g_row - i + 1] = g_board[j][g_row - i];
+			g_board[j][g_colume - i + 1] = g_board[j][g_colume - i];
 		}
 	}
 
