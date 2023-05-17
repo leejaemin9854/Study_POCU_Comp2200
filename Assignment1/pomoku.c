@@ -46,43 +46,6 @@ unsigned int get_column_count(void)
 	return g_colume;
 }
 
-
-int increase_row_count(void)
-{
-	if (g_row == MAX_SIZE)
-		return 0;
-	
-	g_row++;
-	return 1;
-}
-
-int increase_colume_count(void)
-{
-	if (g_colume == MAX_SIZE)
-		return 0;
-
-	g_colume++;
-	return 1;
-}
-
-int decrease_row_count(void)
-{
-	if (g_row == MIN_SIZE)
-		return 0;
-
-	g_row--;
-	return 1;
-}
-
-int decrease_colume_cout(void)
-{
-	if (g_colume == MIN_SIZE)
-		return 0;
-
-	g_colume--;
-	return 1;
-}
-
 int get_score(const color_t color)
 {
 	if (color != COLOR_BLACK && color != COLOR_WHITE)

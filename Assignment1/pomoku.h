@@ -22,16 +22,6 @@ unsigned int get_row_count(void);
 
 unsigned int get_column_count(void);
 
-int increase_row_count(void);
-
-int increase_colume_count(void);
-
-int decrease_row_count(void);
-
-int decrease_colume_cout(void);
-
-
-
 int get_score(const color_t color);
 
 int spend_score(const color_t color, const int amount);
