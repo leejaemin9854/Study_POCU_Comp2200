@@ -8,8 +8,8 @@ int g_board[MAX_SIZE][MAX_SIZE];
 unsigned int g_row;
 unsigned int g_colume;
 
-int g_score_BLACK;
-int g_score_WHITE;
+int g_score_black;
+int g_score_white;
 
 void init_game(void)
 {
@@ -31,8 +31,8 @@ void init_game(void)
     }
 
 
-    g_score_BLACK = 0;
-    g_score_WHITE = 0;
+    g_score_black = 0;
+    g_score_white = 0;
 
 }
 
@@ -48,10 +48,11 @@ unsigned int get_column_count(void)
 
 int get_score(const color_t color)
 {
-    if (is_color(color) == 0)
+    if (is_color(color) == 0) {
         return -1;
+    }
 
-    return color == COLOR_BLACK ? g_score_BLACK : g_score_WHITE;
+    return color == COLOR_BLACK ? g_score_black : g_score_white;
 }
 
 int get_color(const unsigned int row, const unsigned int col)
@@ -71,17 +72,18 @@ int is_color(const color_t color)
 
 int place_stone(const color_t color, const unsigned int row, const unsigned int col)
 {
-    if (is_placeable(row, col) == 0 || (is_color(color) == 0))
-    {
+    if (is_placeable(row, col) == 0 || (is_color(color) == 0)) {
         return 0;
     }
 
     g_board[row][col] = color;
 
-    if (color == COLOR_BLACK)
-        g_score_BLACK += check_new_score(color, row, col);
-    else
-        g_score_WHITE += check_new_score(color, row, col);
+    if (color == COLOR_BLACK) {
+        g_score_black += check_new_score(color, row, col);
+    }
+    else {
+        g_score_white += check_new_score(color, row, col);
+    }
 
     return 1;
 }
@@ -96,21 +98,25 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
     /* row line check */
     row_pos = row;
     while (1) {
-        if (row_pos == 0)
+        if (row_pos == 0) {
             break;
+        }
 
-        if (g_board[row_pos - 1][col] != color)
+        if (g_board[row_pos - 1][col] != color) {
             break;
+        }
 
         row_pos--;
     }
     add_score = 1;
     while (1) {
-        if (row_pos >= g_row)
+        if (row_pos >= g_row) {
             break;
+        }
 
-        if (g_board[row_pos + 1][col] != color)
+        if (g_board[row_pos + 1][col] != color) {
             break;
+        }
 
         row_pos++;
         add_score++;
@@ -122,21 +128,25 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
     /* colume line check */
     col_pos = col;
     while (1) {
-        if (col_pos == 0)
+        if (col_pos == 0) {
             break;
+        }
 
-        if (g_board[row][col_pos - 1] != color)
+        if (g_board[row][col_pos - 1] != color) {
             break;
+        }
 
         col_pos--;
     }
     add_score = 1;
     while (1) {
-        if (col_pos >= g_colume)
+        if (col_pos >= g_colume) {
             break;
+        }
 
-        if (g_board[row][col_pos + 1] != color)
+        if (g_board[row][col_pos + 1] != color) {
             break;
+        }
 
         col_pos++;
         add_score++;
@@ -148,22 +158,26 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
     row_pos = row;
     col_pos = col;
     while (1) {
-        if (row_pos == 0 || col_pos == 0)
+        if (row_pos == 0 || col_pos == 0) {
             break;
+        }
 
-        if (g_board[row_pos - 1][col_pos - 1] != color)
+        if (g_board[row_pos - 1][col_pos - 1] != color) {
             break;
+        }
 
         row_pos--;
         col_pos--;
     }
     add_score = 1;
     while (1) {
-        if (row_pos >= g_row || col_pos >= g_colume)
+        if (row_pos >= g_row || col_pos >= g_colume) {
             break;
+        }
 
-        if (g_board[row_pos + 1][col_pos + 1] != color)
+        if (g_board[row_pos + 1][col_pos + 1] != color) {
             break;
+        }
 
         row_pos++;
         col_pos++;
@@ -177,21 +191,25 @@ int check_new_score(const color_t color, const unsigned int row, const unsigned 
     row_pos = row;
     col_pos = col;
     while (1) {
-        if (row_pos == 0 || col_pos == g_colume - 1)
+        if (row_pos == 0 || col_pos == g_colume - 1) {
             break;
+        }
 
-        if (g_board[row_pos - 1][col_pos + 1] != color)
+        if (g_board[row_pos - 1][col_pos + 1] != color) {
             break;
+        }
 
         row_pos--;
         col_pos++;
     }
     add_score = 1;
     while (1) {
-        if (row_pos >= g_row || col_pos <= 0)
+        if (row_pos >= g_row || col_pos <= 0) {
             break;
-        if (g_board[row_pos + 1][col_pos - 1] != color)
+        }
+        if (g_board[row_pos + 1][col_pos - 1] != color) {
             break;
+        }
 
         row_pos++;
         col_pos--;
@@ -210,23 +228,27 @@ int insert_row(const color_t color, const unsigned int row)
     unsigned int i;
     size_t j;
 
-    if (g_row == MAX_SIZE || row > g_row)
+    if (g_row == MAX_SIZE || row > g_row) {
         return 0;
-    if (is_color(color) == 0)
+    }
+    if (is_color(color) == 0) {
         return 0;
+    }
     if (color == COLOR_BLACK) {
 
-        if (g_score_BLACK < COST_INSERT)
+        if (g_score_black < COST_INSERT) {
             return 0;
+        }
 
-        g_score_BLACK -= COST_INSERT;
+        g_score_black -= COST_INSERT;
     }
     else {
 
-        if (g_score_WHITE < COST_INSERT)
+        if (g_score_white < COST_INSERT) {
             return 0;
+        }
 
-        g_score_WHITE -= COST_INSERT;
+        g_score_white -= COST_INSERT;
     }
 
     g_row++;
@@ -251,23 +273,27 @@ int insert_column(const color_t color, const unsigned int col)
     unsigned int i;
     size_t j;
 
-    if (g_colume == MAX_SIZE || col > g_colume)
+    if (g_colume == MAX_SIZE || col > g_colume) {
         return 0;
-    if (is_color(color) == 0)
+    }
+    if (is_color(color) == 0) {
         return 0;
+    }
     if (color == COLOR_BLACK) {
 
-        if (g_score_BLACK < COST_INSERT)
+        if (g_score_black < COST_INSERT) {
             return 0;
+        }
 
-        g_score_BLACK -= COST_INSERT;
+        g_score_black -= COST_INSERT;
     }
     else {
 
-        if (g_score_WHITE < COST_INSERT)
+        if (g_score_white < COST_INSERT) {
             return 0;
+        }
 
-        g_score_WHITE -= COST_INSERT;
+        g_score_white -= COST_INSERT;
     }
 
     g_colume++;
@@ -292,23 +318,26 @@ int remove_row(const color_t color, const unsigned int row)
     unsigned int i;
     size_t j;
 
-    if (g_row == MIN_SIZE || row >= g_row)
+    if (g_row == MIN_SIZE || row >= g_row) {
         return 0;
-    if (is_color(color) == 0)
+    }
+    if (is_color(color) == 0) {
         return 0;
+    }
     if (color == COLOR_BLACK) {
 
-        if (g_score_BLACK < COST_REMOVE)
+        if (g_score_black < COST_REMOVE)
             return 0;
 
-        g_score_BLACK -= COST_REMOVE;
+        g_score_black -= COST_REMOVE;
     }
     else {
 
-        if (g_score_WHITE < COST_REMOVE)
+        if (g_score_white < COST_REMOVE) {
             return 0;
+        }
 
-        g_score_WHITE -= COST_REMOVE;
+        g_score_white -= COST_REMOVE;
     }
     g_row--;
 
@@ -331,23 +360,27 @@ int remove_column(const color_t color, const unsigned int col)
     unsigned int i;
     size_t j;
 
-    if (g_colume == MIN_SIZE || col >= g_colume)
+    if (g_colume == MIN_SIZE || col >= g_colume) {
         return 0;
-    if (is_color(color) == 0)
+    }
+    if (is_color(color) == 0) {
         return 0;
+    }
     if (color == COLOR_BLACK) {
 
-        if (g_score_BLACK < COST_REMOVE)
+        if (g_score_black < COST_REMOVE) {
             return 0;
+        }
 
-        g_score_BLACK -= COST_REMOVE;
+        g_score_black -= COST_REMOVE;
     }
     else {
 
-        if (g_score_WHITE < COST_REMOVE)
+        if (g_score_white < COST_REMOVE) {
             return 0;
+        }
 
-        g_score_WHITE -= COST_REMOVE;
+        g_score_white -= COST_REMOVE;
     }
     g_colume--;
 
@@ -370,23 +403,27 @@ int swap_rows(const color_t color, const unsigned int row0, const unsigned int r
     unsigned int i;
     int temp[MAX_SIZE] = { COLOR_NONE, };
 
-    if (row0 >= g_row || row1 >= g_row)
+    if (row0 >= g_row || row1 >= g_row) {
         return 0;
-    if (is_color(color) == 0)
+    }
+    if (is_color(color) == 0) {
         return 0;
+    }
     if (color == COLOR_BLACK) {
 
-        if (g_score_BLACK < COST_SWAP)
+        if (g_score_black < COST_SWAP) {
             return 0;
+        }
 
-        g_score_BLACK -= COST_SWAP;
+        g_score_black -= COST_SWAP;
     }
     else {
 
-        if (g_score_WHITE < COST_SWAP)
+        if (g_score_white < COST_SWAP) {
             return 0;
+        }
 
-    g_score_WHITE -= COST_SWAP;
+    g_score_white -= COST_SWAP;
     }
 
 
@@ -409,21 +446,24 @@ int swap_columns(const color_t color, const unsigned int col0, const unsigned in
     int temp[MAX_SIZE] = { COLOR_NONE, };
     if (col0 >= g_colume || col1 >= g_colume)
         return 0;
-    if (is_color(color) == 0)
+    if (is_color(color) == 0) {
         return 0;
+    }
     if (color == COLOR_BLACK) {
 
-        if (g_score_BLACK < COST_SWAP)
+        if (g_score_black < COST_SWAP) {
             return 0;
+        }
 
-        g_score_BLACK -= COST_SWAP;
+        g_score_black -= COST_SWAP;
     }
     else {
 
-        if (g_score_WHITE < COST_SWAP)
+        if (g_score_white < COST_SWAP) {
             return 0;
+        }
 
-        g_score_WHITE -= COST_SWAP;
+        g_score_white -= COST_SWAP;
     }
 
 
@@ -446,23 +486,26 @@ int copy_row(const color_t color, const unsigned int src, const unsigned int dst
 {
     unsigned int i;
 
-    if (src >= g_row || dst >= g_row)
+    if (src >= g_row || dst >= g_row) {
         return 0;
-    if (is_color(color) == 0)
+    }
+    if (is_color(color) == 0) {
         return 0;
+    }
     if (color == COLOR_BLACK) {
 
-        if (g_score_BLACK < COST_COPY)
+        if (g_score_black < COST_COPY)
             return 0;
 
-        g_score_BLACK -= COST_COPY;
+        g_score_black -= COST_COPY;
     }
     else {
 
-        if (g_score_WHITE < COST_COPY)
+        if (g_score_white < COST_COPY) {
             return 0;
+        }
 
-        g_score_WHITE -= COST_COPY;
+        g_score_white -= COST_COPY;
     }
 
     for (i = 0; i < g_colume; i++) {
@@ -476,23 +519,27 @@ int copy_column(const color_t color, const unsigned int src, const unsigned int 
 {
     unsigned i;
 
-    if (src >= g_colume || dst >= g_colume)
+    if (src >= g_colume || dst >= g_colume) {
         return 0;
-    if (is_color(color) == 0)
-    return 0;
+    }
+    if (is_color(color) == 0) {
+        return 0;
+    }
     if (color == COLOR_BLACK) {
 
-        if (g_score_BLACK < COST_COPY)
+        if (g_score_black < COST_COPY) {
             return 0;
+        }
 
-        g_score_BLACK -= COST_COPY;
+        g_score_black -= COST_COPY;
     }
     else {
 
-        if (g_score_WHITE < COST_COPY)
+        if (g_score_white < COST_COPY) {
             return 0;
+        }
 
-        g_score_WHITE -= COST_COPY;
+        g_score_white -= COST_COPY;
     }
 
     for (i = 0; i < g_row; i++) {
