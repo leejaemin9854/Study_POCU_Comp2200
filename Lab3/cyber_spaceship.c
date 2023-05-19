@@ -68,9 +68,6 @@ int get_travel_time(const char* const cab_start_location, const size_t cab_lengt
     int safty_time = 0;
     int dangrous_time = 0;
 
-    const char* p_start_pos = cab_start_location;
-    int p_space_length = 0;
-
     int p_space_cluster;
 
     unsigned int i;
