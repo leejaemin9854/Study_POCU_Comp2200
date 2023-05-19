@@ -95,8 +95,7 @@ int get_travel_time(const char* const cab_start_location, const size_t cab_lengt
         }
         if (p_space_cluster % 2 == 0) {
             safty_time++;
-        }
-        else {
+        } else {
             dangrous_time++;
         }
 
