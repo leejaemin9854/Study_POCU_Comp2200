@@ -33,7 +33,7 @@ int index_of(const char* str, const char* word)
 	length_str = my_strlen(str);
 	length_word = my_strlen(word);
 	
-	if (length_str < length_word)
+	if (length_str == 0 || length_str < length_word)
 		return -1;
 	
 	for (i = 0; i <= length_str - length_word; i++) {
