@@ -1,5 +1,7 @@
 #include "my_string.h"
 
+static char* token_temp;
+
 unsigned int my_strlen(const char* str)
 {
 	unsigned int result = 0;
@@ -30,10 +32,13 @@ int index_of(const char* str, const char* word)
 	unsigned int length_str;
 	unsigned int length_word;
 
+	if (str == 0 || word == 0)
+		return -1;
+
 	length_str = my_strlen(str);
 	length_word = my_strlen(word);
 	
-	if (length_str == 0 || length_str < length_word)
+	if (length_str < length_word)
 		return -1;
 	
 	for (i = 0; i <= length_str - length_word; i++) {
@@ -73,18 +78,15 @@ void reverse_by_words(char* str)
 char* tokenize(char* str_or_null, const char* delims)
 {
 	char* result;
-	static char* temp;
-	
-	unsigned int i, j;
+	unsigned int i;
+	unsigned int j;
 	unsigned int length_str, length_del;
-	unsigned int length_temp;
-
 
 	if (str_or_null != 0) {
 		result = str_or_null;
 	}
 	else {
-		result = temp;
+		result = token_temp;
 	}
 
 	length_str = my_strlen(result);
@@ -98,52 +100,48 @@ char* tokenize(char* str_or_null, const char* delims)
 
 			if (result[i] == delims[j]) {
 
-				result[i] = 0;
-				
-				temp = &result[i + 1];
-				length_temp = my_strlen(temp);
+				result[i] = '\0';
+				token_temp = &result[i + 1];
 
-				for (i = 0; i < length_temp; i++) {
+				while (*token_temp != '\0') {
+
 					for (j = 0; j < length_del; j++) {
-						
-						if (temp[i] == delims[j])
+						if (*token_temp == delims[j])
 							break;
-						else if (j == length_del - 1) {
-							temp = &temp[i];
-							i = length_str;
+					}
+					if (j == length_del) {
 
-							return result;
-						}
+						return result;
 
 					}
-				}
+					else {
+						token_temp++;
+					}
 
-				return result;
+				}
 
 			}
 
 		}
 	}
 
-	temp = &result[i];
+
+	token_temp = &result[i];
 	return result;
 }
 
 char* reverse_tokenize(char* str_or_null, const char* delims)
 {
 	char* result;
-	static char* temp;
-
-	unsigned int i, j;
+	unsigned int i;
+	unsigned int j;
 	unsigned int length_str, length_del;
-	unsigned int length_temp;
-
 
 	if (str_or_null != 0) {
 		result = str_or_null;
 	}
 	else {
-		result = temp;
+		result = token_temp;
 	}
 
 	length_str = my_strlen(result);
@@ -157,38 +155,35 @@ char* reverse_tokenize(char* str_or_null, const char* delims)
 
 			if (result[i] == delims[j]) {
 
-				result[i] = 0;
+				result[i] = '\0';
+				token_temp = &result[i + 1];
 
-				temp = &result[i + 1];
-				length_temp = my_strlen(temp);
+				while (*token_temp != '\0') {
 
-				for (i = 0; i < length_temp; i++) {
 					for (j = 0; j < length_del; j++) {
-
-						if (temp[i] == delims[j])
+						if (*token_temp == delims[j])
 							break;
-						else if (j == length_del - 1) {
-							temp = &temp[i];
-							i = length_str;
+					}
+					if (j == length_del) {
 
-							reverse(result);
-							return result;
-						}
+						reverse(result);
+						return result;
 
 					}
-				}
+					else {
+						token_temp++;
+					}
 
-				reverse(result);
-				return result;
+				}
 
 			}
 
 		}
 	}
-	reverse(result);
-	temp = &result[i];
-	return result;
 
-	
+
+	token_temp = &result[i];
+	reverse(result);
+	return result;
 }
 
