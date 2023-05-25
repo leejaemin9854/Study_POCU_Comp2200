@@ -92,7 +92,7 @@ char* tokenize(char* str_or_null, const char* delims)
     unsigned int i;
     unsigned int j;
     unsigned int length_str;
-    unsgined int length_del;
+    unsigned int length_del;
 
     if (str_or_null != 0) {
         result = str_or_null;
