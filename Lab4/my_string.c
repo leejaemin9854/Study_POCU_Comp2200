@@ -9,7 +9,7 @@ unsigned int my_strlen(const char* str)
         result++;
     }
 
-    return result - 1;
+    return result;
 }
 
 void reverse(char* str)
@@ -29,8 +29,7 @@ void reverse(char* str)
 
 int index_of(const char* str, const char* word)
 {
-    unsigned int i;
-    unsigned int j;
+    unsigned int i, j;
 
     unsigned int length_str;
     unsigned int length_word;
@@ -49,7 +48,7 @@ int index_of(const char* str, const char* word)
     if (length_str < length_word) {
         return -1;
     }
-
+	
     for (i = 0; i <= length_str - length_word; i++) {
 
         for (j = 0; j < length_word; j++) {
@@ -147,12 +146,12 @@ char* reverse_tokenize(char* str_or_null, const char* delims)
     char* result;
     unsigned int i;
     unsigned int j;
-    unsigned int length_str;
-    unsigned int length_del;
+    unsigned int length_str, length_del;
 
     if (str_or_null != 0) {
         result = str_or_null;
-    } else {
+    }
+    else {
         result = g_token_temp;
     }
 
