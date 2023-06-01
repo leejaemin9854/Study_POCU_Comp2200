@@ -24,7 +24,7 @@ int add_item(const char* name, double price)
 		return 0;
 	}
 
-	if (strlen(name) > 25u || price > 999.99f || price < 0) {
+	if (strlen(name) == 0 || strlen(name) > 25u || price > 999.99f || price < 0) {
 		return 0;
 	}
 
@@ -74,7 +74,7 @@ void set_message(const char* message)
 	g_buffer[i++] = '\n';
 	g_buffer[i] = '\0';
 
-	
+
 	sprintf(g_message, g_buffer);
 	return;
 }
@@ -99,7 +99,7 @@ int print_receipt(const char* filename, time_t timestamp)
 	char receipt[BUFFER_SIZE];
 
 	FILE* fp;
-	
+
 	if (g_item_index == 0) {
 		return 0;
 	}
@@ -119,7 +119,12 @@ int print_receipt(const char* filename, time_t timestamp)
 	tax = g_sub_total * 0.05f + 0.005f;
 	total = g_sub_total + g_tip + tax;
 
-	sprintf(g_buffer, "%33s%17.2f\n%33s%17.2f\n%33s%17.2f\n%33s%17.2f\n\n", "Subtotal", g_sub_total, "Tip", g_tip, "Tax", tax, "Total", total);
+	sprintf(g_buffer, "%33s%17.2f\n", "Subtotal", g_sub_total);
+	if (g_tip > 0)
+		sprintf(&g_buffer[strlen(g_buffer)], "%33s%17.2f\n", "Tip", g_tip);
+
+	sprintf(&g_buffer[strlen(g_buffer)], "%33s%17.2f\n", "Tax", tax);
+	sprintf(&g_buffer[strlen(g_buffer)], "%33s%17.2f\n\n", "Total", total);
 	strcat(receipt, g_buffer);
 
 	if (strlen(g_message) > 0)
