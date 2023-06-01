@@ -58,24 +58,22 @@ void set_message(const char* message)
 	if (lenth > 50) {
 
 		for (i = 0; i < 50; i++) {
-			g_buffer[i] = message[i];
+			g_message[i] = message[i];
 		}
-		g_buffer[i++] = '\n';
+		g_message[i++] = '\n';
 		for (; i <= lenth; i++) {
-			g_buffer[i] = message[i - 1];
+			g_message[i] = message[i - 1];
 		}
 
 	}
 	else {
 		for (i = 0; i < lenth; i++) {
-			g_buffer[i] = message[i];
+			g_message[i] = message[i];
 		}
 	}
-	g_buffer[i++] = '\n';
-	g_buffer[i] = '\0';
+	g_message[i++] = '\n';
+	g_message[i] = '\0';
 
-
-	sprintf(g_message, g_buffer);
 	return;
 }
 
@@ -107,7 +105,8 @@ int print_receipt(const char* filename, time_t timestamp)
 	sprintf(receipt, "Charles'.Seafood\n");
 	strcat(receipt, "--------------------------------------------------\n");
 
-	set_time(time(NULL));
+	set_time(timestamp);
+
 	sprintf(&receipt[strlen(receipt)], "%s%26s%05d\n", g_time_line, " ", ++daily_orders);
 	strcat(receipt, "--------------------------------------------------\n");
 
