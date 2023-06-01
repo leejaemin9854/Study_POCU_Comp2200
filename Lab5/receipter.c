@@ -79,14 +79,13 @@ void set_message(const char* message)
 
 int set_time(time_t timestamp)
 {
-	struct tm tm = *localtime(&timestamp);
+	struct tm* tm = gmtime(&timestamp);
 
-	if (timestamp < 0)
+	if (tm == NULL)
 		return 0;
 
-	sprintf(g_time_line, "%d-%02d-%02d.%02d:%02d:%02d", 1900 + tm.tm_year, 1 + tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+	sprintf(g_time_line, "%d-%02d-%02d.%02d:%02d:%02d", 1900 + tm->tm_year, 1 + tm->tm_mon, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec);
 	return 1;
-
 }
 
 int print_receipt(const char* filename, time_t timestamp)
