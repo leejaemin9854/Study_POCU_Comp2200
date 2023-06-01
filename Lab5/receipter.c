@@ -8,7 +8,7 @@ char g_time_line[64];
 char g_message[128];
 
 
-unsigned int daily_orders = 0;
+unsigned int g_daily_orders = 0;
 char g_items[10][64];
 unsigned int g_item_index = 0;
 
@@ -79,12 +79,12 @@ void set_message(const char* message)
 
 int set_time(time_t timestamp)
 {
-	struct tm* tm = gmtime(&timestamp);
+	struct tm* t = gmtime(&timestamp);
 
-	if (tm == NULL)
+	if (t == NULL)
 		return 0;
 
-	sprintf(g_time_line, "%d-%02d-%02d.%02d:%02d:%02d", 1900 + tm->tm_year, 1 + tm->tm_mon, tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec);
+	sprintf(g_time_line, "%d-%02d-%02d.%02d:%02d:%02d", 1900 + t->tm_year, 1 + t->tm_mon, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
 	return 1;
 }
 
@@ -106,7 +106,7 @@ int print_receipt(const char* filename, time_t timestamp)
 
 	set_time(timestamp);
 
-	sprintf(&receipt[strlen(receipt)], "%s%26s%05d\n", g_time_line, " ", ++daily_orders);
+	sprintf(&receipt[strlen(receipt)], "%s%26s%05d\n", g_time_line, " ", ++g_daily_orders);
 	strcat(receipt, "--------------------------------------------------\n");
 
 	for (i = 0; i < g_item_index; i++) {
