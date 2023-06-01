@@ -40,8 +40,9 @@ int add_item(const char* name, double price)
 
 void set_tip(double tip)
 {
-    if (tip < 0 || tip > 999.99f)
+    if (tip < 0 || tip > 999.99f) {
         return;
+    }
 
     g_tip = tip;
 }
@@ -91,7 +92,8 @@ int set_time(time_t timestamp)
 int print_receipt(const char* filename, time_t timestamp)
 {
     int i = 0;
-    double tax = 0, total = 0;
+    double tax = 0;
+    double total = 0;
 
     char receipt[BUFFER_SIZE];
 
