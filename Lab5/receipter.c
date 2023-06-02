@@ -24,9 +24,6 @@ int add_item(const char* name, double price)
         return 0;
     }
 
-    if (strlen(name) > 25u || price > 999.99f || price < 0) {
-        return 0;
-    }
 
 
     sprintf(g_buffer, "%33s%17.2f\n", name, price);
