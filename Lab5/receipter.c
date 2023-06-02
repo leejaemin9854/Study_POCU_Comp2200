@@ -85,7 +85,7 @@ int set_time(time_t timestamp)
         return 0;
     }
 
-    sprintf(g_time_line, "%d-%02d-%02d.%02d:%02d:%02d", 1900 + t->tm_year, 1 + t->tm_mon, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
+    sprintf(g_time_line, "%d-%02d-%02d %02d:%02d:%02d", 1900 + t->tm_year, 1 + t->tm_mon, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
     return 1;
 }
 
