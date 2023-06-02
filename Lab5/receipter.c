@@ -32,7 +32,7 @@ int add_item(const char* name, double price)
         return 0;
     }
 
-    strcat(food_name, name, length);
+    strncat(food_name, name, length);
 
 
     sprintf(g_buffer, "%33s%17.2f\n", food_name, price);
