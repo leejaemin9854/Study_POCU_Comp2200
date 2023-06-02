@@ -20,16 +20,20 @@ double g_tip = 0;
 
 int add_item(const char* name, double price)
 {
+    int test, test1;
+    char foodname[26];
     if (g_item_index == 10) {
         return 0;
     }
 
-    if (strlen(name) == 0 || strlen(name) > 25u || price > 999.99f || price < 0) {
+    if (strlen(name) == 0 || price > 999.99f || price < 0) {
         return 0;
     }
 
+    strncpy(foodname, name, sizeof(foodname) - 1);
+    foodname[25] = '\0';
 
-    sprintf(g_buffer, "%33s%17.2f\n", name, price);
+    sprintf(g_buffer, "%33s%17.2f\n", foodname, price);
     strcpy(&g_items[g_item_index][0], g_buffer);
 
     g_item_index++;
@@ -145,6 +149,7 @@ int print_receipt(const char* filename, time_t timestamp)
 
     fp = fopen(filename, "w");
     fputs(receipt, fp);
+    printf("%s\n", receipt);
     fclose(fp);
 
     return 1;
