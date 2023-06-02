@@ -21,19 +21,12 @@ double g_tip = 0;
 int add_item(const char* name, double price)
 {
     char food_name[64];
-    size_t length = strlen(name);
 
     if (g_item_index == 10) {
         return 0;
     }
 
-
-    food_name[0] = '\0';
-
-    if (length > 25u) {
-        length = 25u;
-    }
-    strncat(food_name, name, length);
+    strcpy(food_name, name);
 
     sprintf(g_buffer, "%33s%17.2f\n", food_name, price);
     strcpy(&g_items[g_item_index][0], g_buffer);
