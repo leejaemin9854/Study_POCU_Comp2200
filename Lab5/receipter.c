@@ -20,16 +20,19 @@ double g_tip = 0;
 
 int add_item(const char* name, double price)
 {
+    char food_name[25];
+
     if (g_item_index == 10) {
         return 0;
     }
 
-    if (strlen(name) == 0 || strlen(name) > 25u || price > 999.99f || price < 0) {
+    if (price > 999.99f || price < 0) {
         return 0;
     }
+    
+    strncpy(food_name, name, sizeof(food_name));
 
-
-    sprintf(g_buffer, "%33s%17.2f\n", name, price);
+    sprintf(g_buffer, "%33s%17.2f\n", food_name, price);
     strcpy(&g_items[g_item_index][0], g_buffer);
 
     g_item_index++;
@@ -53,8 +56,9 @@ void set_message(const char* message)
     size_t lenth = strlen(message);
 
     if (lenth > 75) {
-        return;
+        lenth = 75;
     }
+
 
     if (lenth > 50) {
 
