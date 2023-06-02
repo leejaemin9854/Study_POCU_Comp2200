@@ -26,6 +26,10 @@ int add_item(const char* name, double price)
         return 0;
     }
 
+    if (strlen(name) > 25u) {
+        return 0;
+    }
+
     strcpy(food_name, name);
 
     sprintf(g_buffer, "%33s%17.2f\n", food_name, price);
