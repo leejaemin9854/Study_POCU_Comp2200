@@ -9,7 +9,7 @@ char g_message[128];
 
 
 unsigned int g_daily_orders = 0;
-char g_items[10][64];
+char g_items[10][128];
 unsigned int g_item_index = 0;
 
 
@@ -20,6 +20,8 @@ double g_tip = 0;
 
 int add_item(const char* name, double price)
 {
+    char food_name[64];
+
     if (g_item_index == 10) {
         return 0;
     }
@@ -28,8 +30,9 @@ int add_item(const char* name, double price)
         return 0;
     }
 
+    strcpy(food_name, name);
 
-    sprintf(g_buffer, "%33s%17.2f\n", name, price);
+    sprintf(g_buffer, "%33s%17.2f\n", food_name, price);
     strcpy(&g_items[g_item_index][0], g_buffer);
 
     g_item_index++;
