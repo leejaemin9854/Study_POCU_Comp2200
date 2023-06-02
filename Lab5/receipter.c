@@ -29,7 +29,7 @@ int add_item(const char* name, double price)
     }
 
     if (length > 25u) {
-        return 0;
+        length = 25;
     }
 
     strncat(food_name, name, length);
