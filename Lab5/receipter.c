@@ -103,7 +103,7 @@ int print_receipt(const char* filename, time_t timestamp)
         return 0;
     }
 
-    sprintf(receipt, "Charles'.Seafood\n");
+    sprintf(receipt, "Charles' Seafood\n");
     strcat(receipt, "--------------------------------------------------\n");
 
     set_time(timestamp);
