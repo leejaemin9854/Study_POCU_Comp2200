@@ -21,7 +21,6 @@ double g_tip = 0;
 int add_item(const char* name, double price)
 {
     int test, test1;
-    char foodname[26];
     if (g_item_index == 10) {
         return 0;
     }
@@ -30,10 +29,8 @@ int add_item(const char* name, double price)
         return 0;
     }
 
-    strncpy(foodname, name, sizeof(foodname) - 1);
-    foodname[25] = '\0';
 
-    sprintf(g_buffer, "%33s%17.2f\n", foodname, price);
+    sprintf(g_buffer, "%33s%17.2f\n", name, price);
     strcpy(&g_items[g_item_index][0], g_buffer);
 
     g_item_index++;
