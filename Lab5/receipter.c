@@ -24,7 +24,7 @@ int add_item(const char* name, double price)
         return 0;
     }
 
-    if (strlen(name) == 0 || strlen(name) > 25u || price > 999.99f || price < 0) {
+    if (strlen(name) > 25u || price > 999.99f || price < 0) {
         return 0;
     }
 
