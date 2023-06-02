@@ -145,7 +145,6 @@ int print_receipt(const char* filename, time_t timestamp)
 
     fp = fopen(filename, "w");
     fputs(receipt, fp);
-    printf("%s\n", receipt);
     fclose(fp);
 
     return 1;
