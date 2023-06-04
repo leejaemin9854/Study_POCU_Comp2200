@@ -107,17 +107,22 @@ int print_receipt(const char* filename, time_t timestamp)
     FILE* fp;
 
     if (g_item_index == 0) {
+
+        g_item_index = 0;
+        g_message[0] = '\0';
+        g_sub_total = 0;
+        g_tip = 0;
+
         return 0;
     }
 
-    sprintf(receipt, "Charles' Seafood");
-    strcat(receipt, (char*)10);
+    sprintf(receipt, "Charles' Seafood\n");
 
     strcat(receipt, "--------------------------------------------------\n");
 
     set_time(timestamp);
 
-    sprintf(&receipt[strlen(receipt)], "%s%26s%05d\n", g_time_line, " ", ++g_daily_orders);
+    sprintf(&receipt[strlen(receipt)], "%s%26s%05d\n", g_time_line, " ", g_daily_orders++);
     strcat(receipt, "--------------------------------------------------\n");
 
     for (i = 0; i < g_item_index; i++) {
@@ -125,7 +130,7 @@ int print_receipt(const char* filename, time_t timestamp)
     }
     strcat(receipt, "\n");
 
-    tax = g_sub_total * 0.05f + 0.005f;
+    tax = g_sub_total * 0.05f;
     total = g_sub_total + g_tip + tax;
 
     sprintf(g_buffer, "%33s%17.2f\n", "Subtotal", g_sub_total);
@@ -151,7 +156,7 @@ int print_receipt(const char* filename, time_t timestamp)
     g_sub_total = 0;
     g_tip = 0;
 
-    fp = fopen(filename, "w");
+    fp = fopen(filename, "wb");
     fputs(receipt, fp);
     fclose(fp);
 
