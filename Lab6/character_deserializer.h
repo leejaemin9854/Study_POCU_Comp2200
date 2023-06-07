@@ -68,19 +68,23 @@ typedef struct {
     unsigned int minion_count;
 
     elemental_resistance_t elemental_resistance;
-    minion_t minions;
+    minion_t minions[3];
 
 } character_v3_t;
 
 int isalpha(char ch);
 
+void convert_string(unsigned int num, char* string);
+
 unsigned int convert_unsigned_int(const char* str);
 
 int version_check(const char* const info);
 
-character_v1_t convert_character_v1(const char* info);
+character_v1_t* convert_character_v1(const char* info, character_v1_t* character_v1);
 
-character_v2_t convert_character_v2(const char* info);
+character_v2_t* convert_character_v2(const char* info, character_v2_t* character_v2);
+
+character_v3_t convert_character_v3(const char* info, character_v3_t* character_v3);
 
 int get_character(const char* filename, character_v3_t* out_character);
 
