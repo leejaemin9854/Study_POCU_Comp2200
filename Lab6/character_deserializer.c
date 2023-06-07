@@ -133,20 +133,25 @@ character_v2_t* convert_character_v2(const char* info, character_v2_t* character
 {
     unsigned int i;
     size_t index=0;
+    size_t length;
 
     unsigned int member_value[9] = { 0, };
 
     while(*info++!='\n');
 
     index=0;
-    while(info[index++]!=',');
-    if(index>51) {
-        index=51;
+    while (info[index] != ',') {
+        index++;
     }
-    strncpy(character_v2->name, info, index-1);
-    character_v2->name[index - 1] = '\0';
+    length = index;
+    if (length > 50) {
+        length = 50;
+    }
 
-    info=&info[index];
+    strncpy(character_v2->name, info, length);
+    character_v2->name[length] = '\0';
+
+    info=&info[++index];
 
     for(i=0; i<9; i++) {
 
