@@ -180,11 +180,12 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
     character_v3_t* result;
     result = character_v3;
 
-    unsigned int member_value[13]={0, };
-
     unsigned int i;
     size_t index;
     size_t length;
+
+    unsigned int member_value[13]={0, };
+
 
     while(*info++!='\n');
 
