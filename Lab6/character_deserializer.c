@@ -74,12 +74,11 @@ int version_check(const char* info)
 
 character_v1_t* convert_character_v1(const char* info, character_v1_t* const character_v1)
 {
-
-    char member_name[8][64]={0, };
-    int member_value[8]={0, };
-
     unsigned int i;
     size_t index=0;
+
+    char member_name[8][64] = { 0, };
+    int member_value[8] = { 0, };
 
     for(i=0; i<8; i++) {
 
@@ -132,10 +131,10 @@ character_v1_t* convert_character_v1(const char* info, character_v1_t* const cha
 
 character_v2_t* convert_character_v2(const char* info, character_v2_t* character_v2)
 {
-    unsigned int member_value[9]={0, };
-
     unsigned int i;
     size_t index=0;
+
+    unsigned int member_value[9] = { 0, };
 
     while(*info++!='\n');
 
