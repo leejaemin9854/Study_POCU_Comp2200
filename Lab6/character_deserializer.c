@@ -176,8 +176,7 @@ character_v2_t* convert_character_v2(const char* info, character_v2_t* character
 
 character_v3_t* convert_character_v3(const char* info, character_v3_t* character_v3)
 {
-    character_v3_t* result;
-    result = character_v3;
+    character_v3_t* result = character_v3;
 
     unsigned int i;
     size_t index;
