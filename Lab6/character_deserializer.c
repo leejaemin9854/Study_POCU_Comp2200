@@ -34,10 +34,10 @@ void convert_string(unsigned int num, char* const string)
 
 unsigned int convert_unsigned_int(const char* str)
 {
-    unsigned int result=0;
+    unsigned int result = 0;
 
-    while(*str != 0) {
-        result = result*10u + *str-48u;
+    while (*str != 0) {
+        result = result * 10u + *str - 48u;
         str++;
     }
 
@@ -48,23 +48,25 @@ unsigned int convert_unsigned_int(const char* str)
 
 int version_check(const char* info)
 {
-    int result=0;
+    int result = 0;
 
-    while(*info==' ' || *info=='_' || is_alpha(*info)) {
+    while (*info == ' ' || *info == '_' || is_alpha(*info)) {
         info++;
     }
 
-    if((*info)==':') {
+    if ((*info) == ':') {
 
-        result=1;
+        result = 1;
 
-    } else if((*info)==',') {
+    }
+    else if ((*info) == ',') {
 
-        result=2;
+        result = 2;
 
-    } else if((*info)=='|') {
+    }
+    else if ((*info) == '|') {
 
-        result=3;
+        result = 3;
 
     }
 
@@ -75,50 +77,50 @@ int version_check(const char* info)
 character_v1_t* convert_character_v1(const char* info, character_v1_t* const character_v1)
 {
     unsigned int i;
-    size_t index=0;
+    size_t index = 0;
 
     char member_name[8][64] = { 0, };
     int member_value[8] = { 0, };
 
-    for(i=0; i<8; i++) {
+    for (i = 0; i < 8; i++) {
 
-        index=0;
-        while(info[index++]!=':');
+        index = 0;
+        while (info[index++] != ':');
 
-        strncpy(member_name[i], info, index-1);
+        strncpy(member_name[i], info, index - 1);
 
-        while(info[index]>=48 && info[index]<=57) {
-            member_value[i] = member_value[i]*10 + info[index]-48;
+        while (info[index] >= 48 && info[index] <= 57) {
+            member_value[i] = member_value[i] * 10 + info[index] - 48;
             index++;
 
         }
-        info=&info[++index];
+        info = &info[++index];
         
     }
 
-    for(i=0; i<8; i++) {
-        if(strncmp(member_name[i], "lvl", 3)==0) {
-            character_v1->lvl=member_value[i];
+    for (i = 0; i < 8; i++) {
+        if (strncmp(member_name[i], "lvl", 3) == 0) {
+            character_v1->lvl = member_value[i];
 
-        } else if(strncmp(member_name[i], "intel", 5)==0) {
+        } else if (strncmp(member_name[i], "intel", 5) == 0) {
             character_v1->intel=member_value[i];
 
-        } else if(strncmp(member_name[i], "str", 3)==0) {
+        } else if (strncmp(member_name[i], "str", 3) == 0) {
             character_v1->str=member_value[i];
 
-        } else if(strncmp(member_name[i], "dex", 3)==0) {
+        } else if (strncmp(member_name[i], "dex", 3) == 0) {
             character_v1->dex=member_value[i];
 
-        } else if(strncmp(member_name[i], "def", 3)==0) {
+        } else if (strncmp(member_name[i], "def", 3) == 0) {
             character_v1->def=member_value[i];
 
-        } else if(strncmp(member_name[i], "id", 2)==0) {
+        } else if (strncmp(member_name[i], "id", 2) == 0) {
             character_v1->id=member_value[i];
 
-        } else if(strncmp(member_name[i], "hp", 2)==0) {
+        } else if (strncmp(member_name[i], "hp", 2) == 0) {
             character_v1->hp=member_value[i];
 
-        } else if(strncmp(member_name[i], "mp", 2)==0) {
+        } else if (strncmp(member_name[i], "mp", 2) == 0) {
             character_v1->mp=member_value[i];
 
         }
@@ -132,14 +134,14 @@ character_v1_t* convert_character_v1(const char* info, character_v1_t* const cha
 character_v2_t* convert_character_v2(const char* info, character_v2_t* character_v2)
 {
     unsigned int i;
-    size_t index=0;
+    size_t index = 0;
     size_t length;
 
     unsigned int member_value[9] = { 0, };
 
-    while(*info++!='\n');
+    while (*info++ != '\n');
 
-    index=0;
+    index = 0;
     while (info[index] != ',') {
         index++;
     }
@@ -151,29 +153,29 @@ character_v2_t* convert_character_v2(const char* info, character_v2_t* character
     strncpy(character_v2->name, info, length);
     character_v2->name[length] = '\0';
 
-    info=&info[++index];
+    info = &info[++index];
 
-    for(i=0; i<9; i++) {
+    for (i = 0; i < 9; i++) {
 
-        index=0;
-        while(info[index]>=48 && info[index]<=57) {
-            member_value[i] = member_value[i]*10 + info[index]-48;
+        index = 0;
+        while (info[index] >= 48 && info[index] <= 57) {
+            member_value[i] = member_value[i] * 10 + info[index] - 48;
             index++;
         }
 
-        info=&info[++index];
+        info = &info[++index];
     }
 
-    index=0;
-    character_v2->level=member_value[index++];
-    character_v2->strength=member_value[index++];
-    character_v2->dexterity=member_value[index++];
-    character_v2->intelligence=member_value[index++];
-    character_v2->armour=member_value[index++];
-    character_v2->evasion=member_value[index++];
-    character_v2->magic_resistance=member_value[index++];
-    character_v2->health=member_value[index++];
-    character_v2->mana=member_value[index];
+    index = 0;
+    character_v2->level = member_value[index++];
+    character_v2->strength = member_value[index++];
+    character_v2->dexterity = member_value[index++];
+    character_v2->intelligence = member_value[index++];
+    character_v2->armour = member_value[index++];
+    character_v2->evasion = member_value[index++];
+    character_v2->magic_resistance = member_value[index++];
+    character_v2->health = member_value[index++];
+    character_v2->mana = member_value[index];
 
     return character_v2;
 }
@@ -192,135 +194,135 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
     result = character_v3;
 
 
-    while(*info++!='\n');
+    while (*info++ != '\n');
 
-    index=0;
-    while(info[index]!=' ' && info[index]!='|') {
+    index = 0;
+    while (info[index] != ' ' && info[index] != '|') {
         index++;
     }
 
-    length=index;
-    if(length>50) {
-        length=50;
+    length = index;
+    if (length > 50) {
+        length = 50;
     }
 
     strncpy(character_v3->name, info, length);
-    character_v3->name[length]='\0';
+    character_v3->name[length] = '\0';
 
-    while(info[index++]!='|');
-    info=&info[index];
+    while (info[index++] != '|');
+    info = &info[index];
 
-    for(i=0; i<13; i++) {
+    for (i = 0; i < 13; i++) {
 
-        index=0;
-        while(info[index]<48 || info[index]>57) {
+        index = 0;
+        while (info[index] < 48 || info[index]>57) {
             index++;
         }
-        info=&info[index];
+        info = &info[index];
 
-        index=0;
-        while(info[index]>=48 && info[index]<=57) {
-            member_value[i]=member_value[i]*10 + info[index]-48;
+        index = 0;
+        while (info[index] >= 48 && info[index] <= 57) {
+            member_value[i] = member_value[i] * 10 + info[index] - 48;
             index++;
 
         }
-        info=&info[index];
+        info = &info[index];
     }
 
-    index=0;
-    character_v3->level=member_value[index++];
-    character_v3->health=member_value[index++];
-    character_v3->mana=member_value[index++];
-    character_v3->strength=member_value[index++];
-    character_v3->dexterity=member_value[index++];
-    character_v3->intelligence=member_value[index++];
-    character_v3->armour=member_value[index++];
-    character_v3->evasion=member_value[index++];
+    index = 0;
+    character_v3->level = member_value[index++];
+    character_v3->health = member_value[index++];
+    character_v3->mana = member_value[index++];
+    character_v3->strength = member_value[index++];
+    character_v3->dexterity = member_value[index++];
+    character_v3->intelligence = member_value[index++];
+    character_v3->armour = member_value[index++];
+    character_v3->evasion = member_value[index++];
 
-    character_v3->elemental_resistance.fire=member_value[index++];
-    character_v3->elemental_resistance.cold=member_value[index++];
-    character_v3->elemental_resistance.lightning=member_value[index++];
+    character_v3->elemental_resistance.fire = member_value[index++];
+    character_v3->elemental_resistance.cold = member_value[index++];
+    character_v3->elemental_resistance.lightning = member_value[index++];
 
 
-    character_v3->leadership=member_value[index++];
-    character_v3->minion_count=member_value[index++];
+    character_v3->leadership = member_value[index++];
+    character_v3->minion_count = member_value[index++];
 
-    if(character_v3->minion_count>0) {
+    if (character_v3->minion_count > 0) {
 
         while (*info++ != 'n');
 
-        while(*info++!='\n');
+        while (*info++ != '\n');
 
-        for(i=0; i<character_v3->minion_count; i++) {
+        for (i = 0; i < character_v3->minion_count; i++) {
 
             /* Name Copy */
-            index=0;
-            while(info[index]!=' ' && info[index]!='|') {
+            index = 0;
+            while (info[index] != ' ' && info[index] != '|') {
                 index++;
             }
-            length=index;
-            if(length>50) {
-                length=50;
+            length = index;
+            if (length > 50) {
+                length = 50;
             }
             strncpy(character_v3->minions[i].name, info, length);
-            character_v3->minions[i].name[length]='\0';
+            character_v3->minions[i].name[length] = '\0';
 
-            info=&info[index];
+            info = &info[index];
             
             /* Health Copy */
-            index=0;
-            while(info[index]<48 || info[index] >57) {
+            index = 0;
+            while (info[index] < 48 || info[index] >57) {
                 index++;
             }
 
-            info=&info[index];
+            info = &info[index];
 
-            index=0;
-            character_v3->minions[i].health=0;
-            while(info[index]>=48 && info[index]<=57) {
-                character_v3->minions[i].health = character_v3->minions[i].health*10 + info[index]-48;
+            index = 0;
+            character_v3->minions[i].health = 0;
+            while (info[index] >= 48 && info[index] <= 57) {
+                character_v3->minions[i].health = character_v3->minions[i].health * 10 + info[index] - 48;
                 index++;
             }
-            info=&info[index];
+            info = &info[index];
 
-            index=0;
-            while(info[index]<48 || info[index]>57) {
+            index = 0;
+            while (info[index] < 48 || info[index]>57) {
                 index++;
             }
 
-            info=&info[index];
+            info = &info[index];
 
 
             /* Strength Copy */
-            index=0;
-            character_v3->minions[i].strength=0;
-            while(info[index]>=48 && info[index]<=57) {
-                character_v3->minions[i].strength=character_v3->minions[i].strength*10 + info[index]-48;
+            index = 0;
+            character_v3->minions[i].strength = 0;
+            while (info[index] >= 48 && info[index] <= 57) {
+                character_v3->minions[i].strength = character_v3->minions[i].strength * 10 + info[index] - 48;
                 index++;
             }
-            info=&info[index];
+            info = &info[index];
 
             index=0;
-            while(info[index]<48 || info[index]>57) {
+            while (info[index] < 48 || info[index]>57) {
                 index++;
             }
-            info=&info[index];
+            info = &info[index];
 
 
             /* Defence Copy */
-            index=0;
-            character_v3->minions[i].defence=0;
-            while(info[index]>=48 && info[index]<=57) {
-                character_v3->minions[i].defence=character_v3->minions[i].defence*10 + info[index]-48;
+            index = 0;
+            character_v3->minions[i].defence = 0;
+            while (info[index] >= 48 && info[index] <= 57) {
+                character_v3->minions[i].defence = character_v3->minions[i].defence * 10 + info[index] - 48;
                 index++;
             }
-            info=&info[index];
+            info = &info[index];
 
-            index=0;
-            while(info[index]!='\n' && info[index]!=0) {
+            index = 0;
+            while (info[index] != '\n' && info[index] != 0) {
                 index++;
             }
-            info=&info[++index];
+            info = &info[++index];
         }
 
     }
@@ -331,8 +333,8 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
 
 int get_character(const char* filename, character_v3_t* out_character)
 {
-    int version=0;
-    char buffer[BUFFER_SIZE]={0, };
+    int version = 0;
+    char buffer[BUFFER_SIZE] = { 0, };
     unsigned int i;
 
     character_v1_t character_v1;
@@ -344,7 +346,7 @@ int get_character(const char* filename, character_v3_t* out_character)
     fread(buffer, sizeof(buffer), 1, stream);
     fclose(stream);
 
-    version=version_check(buffer);
+    version = version_check(buffer);
 
 
     if (version == 1) {
@@ -373,7 +375,7 @@ int get_character(const char* filename, character_v3_t* out_character)
 
         convert_character_v2(buffer, &character_v2);
 
-after_convert_v2:
+    after_convert_v2:
         strcpy(character_v3.name, character_v2.name);
         character_v3.level = character_v2.level;
         character_v3.health = character_v2.health;
@@ -395,7 +397,7 @@ after_convert_v2:
         goto after_convert_v3;
 
     }
-    
+
     if (version == 3) {
 
         convert_character_v3(buffer, &character_v3);
