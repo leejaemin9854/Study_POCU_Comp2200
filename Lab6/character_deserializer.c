@@ -58,13 +58,11 @@ int version_check(const char* info)
 
         result = 1;
 
-    }
-    else if ((*info) == ',') {
+    } else if ((*info) == ',') {
 
         result = 2;
 
-    }
-    else if ((*info) == '|') {
+    } else if ((*info) == '|') {
 
         result = 3;
 
@@ -85,7 +83,9 @@ character_v1_t* convert_character_v1(const char* info, character_v1_t* const cha
     for (i = 0; i < 8; i++) {
 
         index = 0;
-        while (info[index++] != ':');
+        while (info[index++] != ':') {
+
+        }
 
         strncpy(member_name[i], info, index - 1);
 
@@ -103,25 +103,25 @@ character_v1_t* convert_character_v1(const char* info, character_v1_t* const cha
             character_v1->lvl = member_value[i];
 
         } else if (strncmp(member_name[i], "intel", 5) == 0) {
-            character_v1->intel=member_value[i];
+            character_v1->intel = member_value[i];
 
         } else if (strncmp(member_name[i], "str", 3) == 0) {
-            character_v1->str=member_value[i];
+            character_v1->str = member_value[i];
 
         } else if (strncmp(member_name[i], "dex", 3) == 0) {
-            character_v1->dex=member_value[i];
+            character_v1->dex = member_value[i];
 
         } else if (strncmp(member_name[i], "def", 3) == 0) {
-            character_v1->def=member_value[i];
+            character_v1->def = member_value[i];
 
         } else if (strncmp(member_name[i], "id", 2) == 0) {
-            character_v1->id=member_value[i];
+            character_v1->id = member_value[i];
 
         } else if (strncmp(member_name[i], "hp", 2) == 0) {
-            character_v1->hp=member_value[i];
+            character_v1->hp = member_value[i];
 
         } else if (strncmp(member_name[i], "mp", 2) == 0) {
-            character_v1->mp=member_value[i];
+            character_v1->mp = member_value[i];
 
         }
     }
@@ -139,7 +139,9 @@ character_v2_t* convert_character_v2(const char* info, character_v2_t* character
 
     unsigned int member_value[9] = { 0, };
 
-    while (*info++ != '\n');
+    while (*info++ != '\n') {
+
+    }
 
     index = 0;
     while (info[index] != ',') {
@@ -189,12 +191,14 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
     size_t index;
     size_t length;
 
-    unsigned int member_value[13]={0, };
+    unsigned int member_value[13] = { 0, };
 
     result = character_v3;
 
 
-    while (*info++ != '\n');
+    while (*info++ != '\n') {
+
+    }
 
     index = 0;
     while (info[index] != ' ' && info[index] != '|') {
@@ -209,13 +213,15 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
     strncpy(character_v3->name, info, length);
     character_v3->name[length] = '\0';
 
-    while (info[index++] != '|');
+    while (info[index++] != '|') {
+
+    }
     info = &info[index];
 
     for (i = 0; i < 13; i++) {
 
         index = 0;
-        while (info[index] < 48 || info[index]>57) {
+        while (info[index] < 48 || info[index] > 57) {
             index++;
         }
         info = &info[index];
@@ -249,9 +255,13 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
 
     if (character_v3->minion_count > 0) {
 
-        while (*info++ != 'n');
+        while (*info++ != 'n') {
 
-        while (*info++ != '\n');
+        }
+
+        while (*info++ != '\n') {
+
+        }
 
         for (i = 0; i < character_v3->minion_count; i++) {
 
@@ -271,7 +281,7 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
             
             /* Health Copy */
             index = 0;
-            while (info[index] < 48 || info[index] >57) {
+            while (info[index] < 48 || info[index] > 57) {
                 index++;
             }
 
@@ -286,7 +296,7 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
             info = &info[index];
 
             index = 0;
-            while (info[index] < 48 || info[index]>57) {
+            while (info[index] < 48 || info[index] > 57) {
                 index++;
             }
 
@@ -303,7 +313,7 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
             info = &info[index];
 
             index=0;
-            while (info[index] < 48 || info[index]>57) {
+            while (info[index] < 48 || info[index] > 57) {
                 index++;
             }
             info = &info[index];
