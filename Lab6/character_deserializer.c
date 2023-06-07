@@ -240,8 +240,9 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
     character_v3->leadership=member_value[index++];
     character_v3->minion_count=member_value[index++];
 
-    while (*info++ != 'n');
     if(character_v3->minion_count>0) {
+
+        while (*info++ != 'n');
 
         while(*info++!='\n');
 
