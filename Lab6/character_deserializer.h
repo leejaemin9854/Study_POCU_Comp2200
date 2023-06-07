@@ -72,7 +72,7 @@ typedef struct {
 
 } character_v3_t;
 
-int isalpha(char ch);
+int is_alpha(char ch);
 
 void convert_string(unsigned int num, char* string);
 

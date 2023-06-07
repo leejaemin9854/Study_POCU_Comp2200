@@ -3,7 +3,7 @@
 #include <string.h>
 #define BUFFER_SIZE 1024
 
-int isalpha(char ch)
+int is_alpha(char ch)
 {
     return (ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122);
 }
@@ -50,7 +50,7 @@ int version_check(const char* info)
 {
     int result=0;
 
-    while(*info==' ' || *info=='_' || isalpha(*info)) {
+    while(*info==' ' || *info=='_' || is_alpha(*info)) {
         info++;
     }
 
@@ -178,6 +178,7 @@ character_v2_t* convert_character_v2(const char* info, character_v2_t* character
 character_v3_t convert_character_v3(const char* info, character_v3_t* character_v3)
 {
     character_v3_t result;
+    result = character_v3;
     unsigned int member_value[13]={0, };
 
     unsigned int i;
@@ -322,7 +323,6 @@ character_v3_t convert_character_v3(const char* info, character_v3_t* character_
 
 int get_character(const char* filename, character_v3_t* out_character)
 {
-    int result=0;
     int version=0;
     char buffer[BUFFER_SIZE]={0, };
     unsigned int i;
@@ -337,7 +337,6 @@ int get_character(const char* filename, character_v3_t* out_character)
     fclose(stream);
 
     version=version_check(buffer);
-    result=version;
 
 
     if (version == 1) {
