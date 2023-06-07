@@ -78,7 +78,7 @@ void convert_string(unsigned int num, char* string);
 
 unsigned int convert_unsigned_int(const char* str);
 
-int version_check(const char* const info);
+int check_version(const char* const info);
 
 character_v1_t* convert_character_v1(const char* info, character_v1_t* character_v1);
 

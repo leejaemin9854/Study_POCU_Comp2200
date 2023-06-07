@@ -46,7 +46,7 @@ unsigned int convert_unsigned_int(const char* str)
 
 
 
-int version_check(const char* info)
+int check_version(const char* info)
 {
     int result = 0;
 
@@ -312,7 +312,7 @@ character_v3_t* convert_character_v3(const char* info, character_v3_t* character
             }
             info = &info[index];
 
-            index=0;
+            index = 0;
             while (info[index] < 48 || info[index] > 57) {
                 index++;
             }
@@ -356,7 +356,7 @@ int get_character(const char* filename, character_v3_t* out_character)
     fread(buffer, sizeof(buffer), 1, stream);
     fclose(stream);
 
-    version = version_check(buffer);
+    version = check_version(buffer);
 
 
     if (version == 1) {
