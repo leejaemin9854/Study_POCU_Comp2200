@@ -94,7 +94,6 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 	unsigned int index = 0;
 	char escape_buffer[BUFFER_SIZE] = { 0, };
 	unsigned int escape_index = 0;
-	unsigned int escape_length = 0;
 
 	char range_ch[2];
 
@@ -102,7 +101,6 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 		goto out;
 	}
 	
-	escape_length = strlen(escape_buffer);
 
 	while (escape_index < BUFFER_SIZE && escape_buffer[escape_index] != '\0') {
 
@@ -111,7 +109,7 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 			goto out;
 		}
 
-		if (escape_buffer[escape_index] == '-' && index > 0 && index < escape_length - 1 && escape_buffer[escape_index - 1] != '\0') {
+		if (escape_buffer[escape_index] == '-' && index > 0 && index < buffer_size - 1 && escape_buffer[escape_index - 1] != '\0') {
 
 			range_ch[0] = escape_buffer[escape_index - 1] + 1;
 			range_ch[1] = escape_buffer[escape_index + 1];
