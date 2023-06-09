@@ -108,12 +108,12 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 			break;
 		}
 	}
-	/*
+	
 	if (escape_length == BUFFER_SIZE && escape_buffer[escape_length] != '\0') {
 		result = ERROR_CODE_ARGUMENT_TOO_LONG;
 		goto out;
 	}
-	*/
+	
 
 	while (escape_index < escape_length && escape_buffer[escape_index] != '\0') {
 
