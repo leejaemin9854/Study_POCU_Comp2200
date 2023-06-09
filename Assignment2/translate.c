@@ -100,16 +100,15 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 	if ((result = escape_convert(escape_buffer, sizeof(escape_buffer), argv)) != 0) {
 		goto out;
 	}
-	
 
-	while (escape_index < BUFFER_SIZE && escape_buffer[escape_index] != '\0') {
+	while (escape_buffer[escape_index] != '\0') {
 
 		if (index >= buffer_size) {
 			result = ERROR_CODE_ARGUMENT_TOO_LONG;
 			goto out;
 		}
 
-		if (escape_buffer[escape_index] == '-' && index > 0 && index < buffer_size - 1 && escape_buffer[escape_index - 1] != '\0') {
+		if (escape_buffer[escape_index] == '-' && index > 0 && index < buffer_size - 1) {
 
 			range_ch[0] = escape_buffer[escape_index - 1] + 1;
 			range_ch[1] = escape_buffer[escape_index + 1];
@@ -132,7 +131,6 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 				index++;
 			}
 
-			escape_buffer[escape_index + 1] = '\0';
 			escape_index += 2;
 		}
 		else {
@@ -177,7 +175,7 @@ int translate(int argc, const char** argv)
 		i_flag = strncmp(argv[1], "-i", 2) == 0;
 
 		if (!i_flag) {
-			result= ERROR_CODE_INVALID_FLAG;
+			result = ERROR_CODE_INVALID_FLAG;
 			goto exit;
 		}
 	}
@@ -207,7 +205,6 @@ int translate(int argc, const char** argv)
 
 	}
 
-
 	i = 0;
 	while (target[i] != 0) {
 
@@ -220,7 +217,7 @@ int translate(int argc, const char** argv)
 		i++;
 
 	}
-	
+
 	while ((input_ch = fgetc(stdin)) != EOF) {
 
 		if (convert_characters[input_ch] != 0) {
