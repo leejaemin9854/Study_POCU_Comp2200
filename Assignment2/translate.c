@@ -108,7 +108,12 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 			break;
 		}
 	}
-	
+	/*
+	if (escape_length == BUFFER_SIZE && escape_buffer[escape_length] != '\0') {
+		result = ERROR_CODE_ARGUMENT_TOO_LONG;
+		goto out;
+	}
+	*/
 
 	while (escape_index < escape_length && escape_buffer[escape_index] != '\0') {
 
@@ -203,8 +208,17 @@ int translate(int argc, const char** argv)
 		goto exit;
 	}
 
-	i = strlen(target);
-	j = strlen(replace);
+	for (i = 0; i < BUFFER_SIZE; i++) {
+		if (target[i] == '\0') {
+			break;
+		}
+	}
+	for (j = 0; j < BUFFER_SIZE; j++) {
+		if (replace[j] == '\0') {
+			break;
+		}
+	}
+
 	if (i > j) {
 
 		input_ch = replace[j - 1];
@@ -215,7 +229,6 @@ int translate(int argc, const char** argv)
 		replace[j] = 0;
 
 	}
-
 
 	i = 0;
 	while (target[i] != 0) {
