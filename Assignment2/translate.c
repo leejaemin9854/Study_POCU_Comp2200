@@ -110,13 +110,14 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 
 		if (escape_buffer[escape_index] == '-' && index > 0 && index < buffer_size - 1 && escape_buffer[escape_index - 1] != '\0') {
 
-			range_ch[0] = escape_buffer[escape_index - 1] + 1;
+			range_ch[0] = escape_buffer[escape_index - 1];
 			range_ch[1] = escape_buffer[escape_index + 1];
 
-			if (range_ch[0] > range_ch[1]) {
+			if (range_ch[0]++ > range_ch[1]) {
 				result = ERROR_CODE_INVALID_RANGE;
 				goto out;
 			}
+
 
 			while (range_ch[0] <= range_ch[1]) {
 
@@ -205,6 +206,7 @@ int translate(int argc, const char** argv)
 		replace[j] = 0;
 
 	}
+
 
 	i = 0;
 	while (target[i] != 0) {
