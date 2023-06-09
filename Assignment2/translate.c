@@ -101,7 +101,7 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 		goto out;
 	}
 	
-	while (escape_buffer[escape_index] != '\0') {
+	while (escape_index < BUFFER_SIZE && escape_buffer[escape_index] != '\0') {
 
 		if (index >= buffer_size) {
 			result = ERROR_CODE_ARGUMENT_TOO_LONG;
