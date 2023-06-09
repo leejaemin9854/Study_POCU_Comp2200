@@ -29,45 +29,45 @@ int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
             return ERROR_CODE_ARGUMENT_TOO_LONG;
         }
 
+
         /* 92: \ */
         if (input[input_index] == 92) {
 
-            switch (input[input_index + 1]) {
-
-            case 92:/*\*/
+            if (input[input_index + 1] == 92) {
                 buffer[index] = 92;/*\\*/
-                break;
-            case 97:/*a*/
+
+            } else if (input[input_index + 1] == 97) {
                 buffer[index] = 7;/*\a*/
-                break;
-            case 98:/*b*/
+
+            } else if (input[input_index + 1] == 98) {
                 buffer[index] = 8;/*\b*/
-                break;
-            case 102:/*f*/
+
+            } else if (input[input_index + 1] == 102) {
                 buffer[index] = 12;/*\f*/
-                break;
-            case 110:/*n*/
+
+            } else if (input[input_index + 1] == 110) {
                 buffer[index] = 10;/*\n*/
-                break;
-            case 114:/*r*/
+
+            } else if (input[input_index + 1] == 114) {
                 buffer[index] = 13;/*\r*/
-                break;
-            case 116:/*t*/
+
+            } else if (input[input_index + 1] == 116) {
                 buffer[index] = 9;/*\t*/
-                break;
-            case 118:/*v*/
+
+            } else if (input[input_index + 1] == 118) {
                 buffer[index] = 11;/*\v*/
-                break;
-            case 39:/*'*/
+
+            } else if (input[input_index + 1] == 39) {
                 buffer[index] = 39;/*\'*/
-                break;
-            case 34:/*"*/
+
+            } else if (input[input_index + 1] == 34) {
                 buffer[index] = 34;/*\"*/
-                break;
-            default:
+
+            } else {
                 return ERROR_CODE_INVALID_FORMAT;
-                break;
+
             }
+
 
             input_index += 2;
         } else {
