@@ -5,247 +5,248 @@
 
 int change_case(char ch)
 {
-	int def = 'a' - 'A';
+    int def = 'a' - 'A';
 
-	if (ch >= 'A' && ch <= 'Z')
-		return ch + def;
-	else if (ch >= 'a' && ch <= 'z')
-		return ch - def;
-	else
-		return 0;
+    if (ch >= 'A' && ch <= 'Z') {
+        return ch + def;
+    } else if (ch >= 'a' && ch <= 'z') {
+        return ch - def;
+    } else {
+        return 0;
+    }
 }
-
-
 
 int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
 {
-	unsigned int index, input_index;
-	size_t length = strlen(input);
+    unsigned int index;
+    unsigned int input_index;
+    size_t length = strlen(input);
 
-	index = 0;
-	input_index = 0;
-	while (input_index < length) {
-		if (index >= buffer_size) {
-			return ERROR_CODE_ARGUMENT_TOO_LONG;
-		}
+    index = 0;
+    input_index = 0;
+    while (input_index < length) {
+        if (index >= buffer_size) {
+            return ERROR_CODE_ARGUMENT_TOO_LONG;
+        }
 
-		/* 92: \ */
-		if (input[input_index] == 92) {
+        /* 92: \ */
+        if (input[input_index] == 92) {
 
-			switch (input[input_index + 1])
-			{
-			case 92:/*\*/
-				buffer[index] = 92;/*\\*/
-				break;
-			case 97:/*a*/
-				buffer[index] = 7;/*\a*/
-				break;
-			case 98:/*b*/
-				buffer[index] = 8;/*\b*/
-				break;
-			case 102:/*f*/
-				buffer[index] = 12;/*\f*/
-				break;
-			case 110:/*n*/
-				buffer[index] = 10;/*\n*/
-				break;
-			case 114:/*r*/
-				buffer[index] = 13;/*\r*/
-				break;
-			case 116:/*t*/
-				buffer[index] = 9;/*\t*/
-				break;
-			case 118:/*v*/
-				buffer[index] = 11;/*\v*/
-				break;
-			case 39:/*'*/
-				buffer[index] = 39;/*\'*/
-				break;
-			case 34:/*"*/
-				buffer[index] = 34;/*\"*/
-				break;
-			default:
+            switch (input[input_index + 1])
+            {
+            case 92:/*\*/
+                buffer[index] = 92;/*\\*/
+                break;
+            case 97:/*a*/
+                buffer[index] = 7;/*\a*/
+                break;
+            case 98:/*b*/
+                buffer[index] = 8;/*\b*/
+                break;
+            case 102:/*f*/
+                buffer[index] = 12;/*\f*/
+                break;
+            case 110:/*n*/
+                buffer[index] = 10;/*\n*/
+                break;
+            case 114:/*r*/
+                buffer[index] = 13;/*\r*/
+                break;
+            case 116:/*t*/
+                buffer[index] = 9;/*\t*/
+                break;
+            case 118:/*v*/
+                buffer[index] = 11;/*\v*/
+                break;
+            case 39:/*'*/
+                buffer[index] = 39;/*\'*/
+                break;
+            case 34:/*"*/
+                buffer[index] = 34;/*\"*/
+                break;
+            default:
 
-				return ERROR_CODE_INVALID_FORMAT;
-			}
+                return ERROR_CODE_INVALID_FORMAT;
+            }
 
-			input_index += 2;
-		}
-		else {
-			buffer[index] = input[input_index];
+            input_index += 2;
+        } else {
+            buffer[index] = input[input_index];
 
-			input_index++;
-		}
+            input_index++;
+        }
 
-		index++;
-	}
+        index++;
+    }
 
-	return 0;
+    return 0;
 }
 
 
 int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 {
-	int result = 0;
-	unsigned int index = 0;
+    int result = 0;
+    unsigned int index = 0;
 
-	char escape_buffer[BUFFER_SIZE] = { 0, };
-	unsigned int escape_index = 0;
-	unsigned int length;
+    char escape_buffer[BUFFER_SIZE] = { 0, };
+    unsigned int escape_index = 0;
+    unsigned int length;
 
-	char range_ch[2];
+    char range_ch[2];
 
-	result = escape_convert(escape_buffer, BUFFER_SIZE, argv);
-	if (result != 0) {
-		goto exit;
-	}
+    result = escape_convert(escape_buffer, BUFFER_SIZE, argv);
+    if (result != 0) {
+        goto exit;
+    }
 
-	length = strlen(escape_buffer);
+    length = strlen(escape_buffer);
 
-	while (escape_index < length) {
+    while (escape_index < length) {
 
-		if (index >= buffer_size) {
-			result = ERROR_CODE_ARGUMENT_TOO_LONG;
-			goto exit;
-		}
+        if (index >= buffer_size) {
+            result = ERROR_CODE_ARGUMENT_TOO_LONG;
+            goto exit;
+        }
 
-		if (escape_buffer[escape_index] == '-' && escape_index > 0 && escape_index < length - 1 && escape_buffer[escape_index - 1] != '\0') {
+        if (escape_buffer[escape_index] == '-' && escape_index > 0 && escape_index < length - 1 && escape_buffer[escape_index - 1] != '\0') {
 
-			range_ch[0] = escape_buffer[escape_index - 1];
-			range_ch[1] = escape_buffer[escape_index + 1];
+            range_ch[0] = escape_buffer[escape_index - 1];
+            range_ch[1] = escape_buffer[escape_index + 1];
 
-			if (range_ch[0] > range_ch[1]) {
-				result = ERROR_CODE_INVALID_RANGE;
-				goto exit;
-			}
-			range_ch[0]++;
+            if (range_ch[0] > range_ch[1]) {
+                result = ERROR_CODE_INVALID_RANGE;
+                goto exit;
+            }
+            range_ch[0]++;
 
-			while (range_ch[0] <= range_ch[1]) {
+            while (range_ch[0] <= range_ch[1]) {
 
-				if (index >= buffer_size) {
-					result = ERROR_CODE_ARGUMENT_TOO_LONG;
-					goto exit;
-				}
+                if (index >= buffer_size) {
+                    result = ERROR_CODE_ARGUMENT_TOO_LONG;
+                    goto exit;
+                }
 
-				buffer[index] = range_ch[0];
+                buffer[index] = range_ch[0];
 
-				range_ch[0]++;
-				index++;
+                range_ch[0]++;
+                index++;
 
-			}
+            }
 
-			escape_buffer[escape_index + 1] = '\0';
-			escape_index += 2;
+            escape_buffer[escape_index + 1] = '\0';
+            escape_index += 2;
 
-		}
-		else {
+        } else {
 
-			buffer[index] = escape_buffer[escape_index];
+            buffer[index] = escape_buffer[escape_index];
 
-			escape_index++;
-			index++;
+            escape_index++;
+            index++;
 
-		}
-
+        }
 
 
 
-	}
+
+    }
 
 
 
-	
+
 exit:
 
-	return result;
+    return result;
 }
 
 
 int translate(int argc, const char** argv)
 {
-	int result = 0;
+    int result = 0;
 
-	char target[BUFFER_SIZE] = { 0, };
-	char replace[BUFFER_SIZE] = { 0, };
+    char target[BUFFER_SIZE] = { 0, };
+    char replace[BUFFER_SIZE] = { 0, };
 
-	char convert_characters[128] = { 0, };
-	char input_ch;
+    char convert_characters[128] = { 0, };
+    int input_ch;
 
-	unsigned int i;
-	unsigned int j;
+    unsigned int i;
+    unsigned int j;
 
-	int i_flag = 0;
-
-
-	if (argc != 3 && argc != 4) {
-		result = ERROR_CODE_WRONG_ARGUMENTS_NUMBER;
-		goto exit;
-	}
-
-	if (argc == 4) {
-		i_flag = strncmp(argv[1], "-i", 2) == 0;
-
-		if (!i_flag) {
-			result = ERROR_CODE_INVALID_FLAG;
-			goto exit;
-		}
-	}
+    int i_flag = 0;
 
 
+    if (argc != 3 && argc != 4) {
+        result = ERROR_CODE_WRONG_ARGUMENTS_NUMBER;
+        goto exit;
+    }
 
-	result = convert_string(target, BUFFER_SIZE, argv[1 + i_flag]);
-	if (result != 0) {
-		goto exit;
-	}
+    if (argc == 4) {
+        i_flag = strncmp(argv[1], "-i", 2) == 0;
 
-	result = convert_string(replace, BUFFER_SIZE, argv[2 + i_flag]);
-	if (result != 0) {
-		goto exit;
-	}
+        if (!i_flag) {
+            result = ERROR_CODE_INVALID_FLAG;
+            goto exit;
+        }
+    }
 
 
 
-	i = strlen(target);
-	j = strlen(replace);
-	if (i > j) {
+    result = convert_string(target, BUFFER_SIZE, argv[1 + i_flag]);
+    if (result != 0) {
+        goto exit;
+    }
 
-		input_ch = replace[j - 1];
-		for (; j < i; j++) {
-			replace[j] = input_ch;
-		}
-	}
-
-
+    result = convert_string(replace, BUFFER_SIZE, argv[2 + i_flag]);
+    if (result != 0) {
+        goto exit;
+    }
 
 
-	i = 0;
-	while (target[i] != 0) {
 
-		convert_characters[target[i]] = replace[i];
-		if (i_flag && (input_ch = change_case(target[i])) != 0) {
+    i = strlen(target);
+    j = strlen(replace);
+    if (i > j) {
 
-			convert_characters[input_ch] = replace[i];
+        input_ch = replace[j - 1];
+        for (; j < i; j++) {
+            replace[j] = input_ch;
+        }
+    }
 
-		}
-		i++;
 
-	}
 
-	while ((input_ch = fgetc(stdin)) != EOF) {
 
-		if (convert_characters[input_ch] != 0) {
-			fputc(convert_characters[input_ch], stdout);
-			continue;
-		}
+    i = 0;
+    while (target[i] != 0) {
 
-		fputc(input_ch, stdout);
-	}
+        input_ch = target[i];
+        convert_characters[input_ch] = replace[i];
+        if (i_flag && (input_ch = change_case(target[i])) != 0) {
+
+            convert_characters[input_ch] = replace[i];
+
+        }
+        i++;
+
+    }
+
+    while ((input_ch = fgetc(stdin)) != EOF) {
+
+        if (convert_characters[input_ch] != 0) {
+            fputc(convert_characters[input_ch], stdout);
+            continue;
+        }
+
+        fputc(input_ch, stdout);
+    }
 
 
 exit:
 
-	return result;
+    return result;
 }
+
+
 
 
 
