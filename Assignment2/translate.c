@@ -108,7 +108,7 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 			goto out;
 		}
 
-		if (escape_buffer[escape_index] == '-' && index > 0 && index < buffer_size - 1) {
+		if (escape_buffer[escape_index] == '-' && index > 0 && index < buffer_size - 1 && escape_buffer[escape_index - 1] != '\0') {
 
 			range_ch[0] = escape_buffer[escape_index - 1] + 1;
 			range_ch[1] = escape_buffer[escape_index + 1];
@@ -131,6 +131,7 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 				index++;
 			}
 
+			escape_buffer[escape_index + 1] = '\0';
 			escape_index += 2;
 		}
 		else {
