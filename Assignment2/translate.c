@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include "translate.h"
-
 #include <string.h>
+#include "translate.h"
 
 
 int change_case(char ch)
@@ -16,20 +15,24 @@ int change_case(char ch)
 		return 0;
 }
 
+
+
 int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
 {
-	unsigned int index;
+	unsigned int index, input_index;
+	size_t length = strlen(input);
 
 	index = 0;
-	while (*input != '\0') {
+	input_index = 0;
+	while (input_index < length) {
 		if (index >= buffer_size) {
 			return ERROR_CODE_ARGUMENT_TOO_LONG;
 		}
 
 		/* 92: \ */
-		if (*input == 92) {
+		if (input[input_index] == 92) {
 
-			switch (*(input + 1))
+			switch (input[input_index + 1])
 			{
 			case 92:/*\*/
 				buffer[index] = 92;/*\\*/
@@ -66,86 +69,93 @@ int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
 				return ERROR_CODE_INVALID_FORMAT;
 			}
 
-			input += 2;
+			input_index += 2;
 		}
 		else {
-			buffer[index] = *input;
+			buffer[index] = input[input_index];
 
-			input++;
+			input_index++;
 		}
 
 		index++;
 	}
 
-
 	return 0;
 }
-
-
-
-
-
-
 
 
 int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 {
 	int result = 0;
 	unsigned int index = 0;
+
 	char escape_buffer[BUFFER_SIZE] = { 0, };
 	unsigned int escape_index = 0;
+	unsigned int length;
 
 	char range_ch[2];
 
-	if ((result = escape_convert(escape_buffer, sizeof(escape_buffer), argv)) != 0) {
-		goto out;
+	result = escape_convert(escape_buffer, BUFFER_SIZE, argv);
+	if (result != 0) {
+		goto exit;
 	}
 
-	while (escape_buffer[escape_index] != '\0') {
+	length = strlen(escape_buffer);
+
+	while (escape_index < length) {
 
 		if (index >= buffer_size) {
 			result = ERROR_CODE_ARGUMENT_TOO_LONG;
-			goto out;
+			goto exit;
 		}
 
-		if (escape_buffer[escape_index] == '-' && index > 0 && index < buffer_size - 1 && escape_buffer[escape_index - 1] != '\0') {
+		if (escape_buffer[escape_index] == '-' && escape_index > 0 && escape_index < length - 1 && escape_buffer[escape_index - 1] != '\0') {
 
-			range_ch[0] = escape_buffer[escape_index - 1] + 1;
+			range_ch[0] = escape_buffer[escape_index - 1];
 			range_ch[1] = escape_buffer[escape_index + 1];
 
 			if (range_ch[0] > range_ch[1]) {
 				result = ERROR_CODE_INVALID_RANGE;
-				goto out;
+				goto exit;
 			}
+			range_ch[0]++;
 
 			while (range_ch[0] <= range_ch[1]) {
 
 				if (index >= buffer_size) {
 					result = ERROR_CODE_ARGUMENT_TOO_LONG;
-					goto out;
+					goto exit;
 				}
 
 				buffer[index] = range_ch[0];
 
 				range_ch[0]++;
 				index++;
+
 			}
 
 			escape_buffer[escape_index + 1] = '\0';
 			escape_index += 2;
+
 		}
 		else {
+
 			buffer[index] = escape_buffer[escape_index];
 
 			escape_index++;
 			index++;
+
 		}
+
+
 
 
 	}
 
 
-out:
+
+	
+exit:
 
 	return result;
 }
@@ -193,18 +203,19 @@ int translate(int argc, const char** argv)
 		goto exit;
 	}
 
+
+
 	i = strlen(target);
 	j = strlen(replace);
 	if (i > j) {
 
 		input_ch = replace[j - 1];
-
 		for (; j < i; j++) {
 			replace[j] = input_ch;
 		}
-		replace[j] = 0;
-
 	}
+
+
 
 
 	i = 0;
@@ -235,5 +246,6 @@ exit:
 
 	return result;
 }
+
 
 
