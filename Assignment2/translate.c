@@ -32,50 +32,41 @@ int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
         /* 92: \ */
         if (input[input_index] == 92) {
 
-            switch (input[input_index + 1])
-            {
-                case 92:/*\*/
-                    buffer[index] = 92;/*\\*/
-                break;
+            switch (input[input_index + 1]) {
 
-                case 97:/*a*/
-                    buffer[index] = 7;/*\a*/
+            case 92:/*\*/
+                buffer[index] = 92;/*\\*/
                 break;
-
-                case 98:/*b*/
-                    buffer[index] = 8;/*\b*/
+            case 97:/*a*/
+                buffer[index] = 7;/*\a*/
                 break;
-
-                case 102:/*f*/
-                    buffer[index] = 12;/*\f*/
+            case 98:/*b*/
+                buffer[index] = 8;/*\b*/
                 break;
-
-                case 110:/*n*/
-                    buffer[index] = 10;/*\n*/
+            case 102:/*f*/
+                buffer[index] = 12;/*\f*/
                 break;
-
-                case 114:/*r*/
-                    buffer[index] = 13;/*\r*/
+            case 110:/*n*/
+                buffer[index] = 10;/*\n*/
                 break;
-
-                case 116:/*t*/
-                    buffer[index] = 9;/*\t*/
+            case 114:/*r*/
+                buffer[index] = 13;/*\r*/
                 break;
-
-                case 118:/*v*/
-                    buffer[index] = 11;/*\v*/
+            case 116:/*t*/
+                buffer[index] = 9;/*\t*/
                 break;
-
-                case 39:/*'*/
-                    buffer[index] = 39;/*\'*/
+            case 118:/*v*/
+                buffer[index] = 11;/*\v*/
                 break;
-
-                case 34:/*"*/
-                    buffer[index] = 34;/*\"*/
+            case 39:/*'*/
+                buffer[index] = 39;/*\'*/
+                break;
+            case 34:/*"*/
+                buffer[index] = 34;/*\"*/
                 break;
             default:
-
                 return ERROR_CODE_INVALID_FORMAT;
+                break;
             }
 
             input_index += 2;
