@@ -34,35 +34,44 @@ int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
 
             switch (input[input_index + 1])
             {
-            case 92:/*\*/
-                buffer[index] = 92;/*\\*/
+                case 92:/*\*/
+                    buffer[index] = 92;/*\\*/
                 break;
-            case 97:/*a*/
-                buffer[index] = 7;/*\a*/
+
+                case 97:/*a*/
+                    buffer[index] = 7;/*\a*/
                 break;
-            case 98:/*b*/
-                buffer[index] = 8;/*\b*/
+
+                case 98:/*b*/
+                    buffer[index] = 8;/*\b*/
                 break;
-            case 102:/*f*/
-                buffer[index] = 12;/*\f*/
+
+                case 102:/*f*/
+                    buffer[index] = 12;/*\f*/
                 break;
-            case 110:/*n*/
-                buffer[index] = 10;/*\n*/
+
+                case 110:/*n*/
+                    buffer[index] = 10;/*\n*/
                 break;
-            case 114:/*r*/
-                buffer[index] = 13;/*\r*/
+
+                case 114:/*r*/
+                    buffer[index] = 13;/*\r*/
                 break;
-            case 116:/*t*/
-                buffer[index] = 9;/*\t*/
+
+                case 116:/*t*/
+                    buffer[index] = 9;/*\t*/
                 break;
-            case 118:/*v*/
-                buffer[index] = 11;/*\v*/
+
+                case 118:/*v*/
+                    buffer[index] = 11;/*\v*/
                 break;
-            case 39:/*'*/
-                buffer[index] = 39;/*\'*/
+
+                case 39:/*'*/
+                    buffer[index] = 39;/*\'*/
                 break;
-            case 34:/*"*/
-                buffer[index] = 34;/*\"*/
+
+                case 34:/*"*/
+                    buffer[index] = 34;/*\"*/
                 break;
             default:
 
