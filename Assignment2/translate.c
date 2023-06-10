@@ -88,7 +88,7 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
     int result = 0;
     unsigned int index = 0;
 
-    char escape_buffer[BUFFER_SIZE + 1] = { 0, };
+    char escape_buffer[BUFFER_SIZE] = { 0, };
     unsigned int escape_index = 0;
     unsigned int length;
 
@@ -163,8 +163,8 @@ int translate(int argc, const char** argv)
 {
     int result = 0;
 
-    char target[BUFFER_SIZE + 1] = { 0, };
-    char replace[BUFFER_SIZE + 1] = { 0, };
+    char target[BUFFER_SIZE] = { 0, };
+    char replace[BUFFER_SIZE] = { 0, };
 
     char convert_characters[128] = { 0, };
     int input_ch;
