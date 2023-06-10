@@ -25,7 +25,7 @@ int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
     index = 0;
     input_index = 0;
     while (input_index < length) {
-        if (index >= buffer_size) {
+        if (index >= buffer_size - 1) {
             return ERROR_CODE_ARGUMENT_TOO_LONG;
         }
 
@@ -103,7 +103,7 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 
     while (escape_index < length) {
 
-        if (index >= buffer_size) {
+        if (index >= buffer_size - 1) {
             result = ERROR_CODE_ARGUMENT_TOO_LONG;
             goto exit;
         }
@@ -121,7 +121,7 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
 
             while (range_ch[0] <= range_ch[1]) {
 
-                if (index >= buffer_size) {
+                if (index >= buffer_size - 1) {
                     result = ERROR_CODE_ARGUMENT_TOO_LONG;
                     goto exit;
                 }
