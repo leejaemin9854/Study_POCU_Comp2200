@@ -34,34 +34,34 @@ int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
         if (input[input_index] == 92) {
 
             if (input[input_index + 1] == 92) {
-                buffer[index] = 92;/*\\*/
+                buffer[index] = 92;
 
             } else if (input[input_index + 1] == 97) {
-                buffer[index] = 7;/*\a*/
+                buffer[index] = 7;
 
             } else if (input[input_index + 1] == 98) {
-                buffer[index] = 8;/*\b*/
+                buffer[index] = 8;
 
             } else if (input[input_index + 1] == 102) {
-                buffer[index] = 12;/*\f*/
+                buffer[index] = 12;
 
             } else if (input[input_index + 1] == 110) {
-                buffer[index] = 10;/*\n*/
+                buffer[index] = 10;
 
             } else if (input[input_index + 1] == 114) {
-                buffer[index] = 13;/*\r*/
+                buffer[index] = 13;
 
             } else if (input[input_index + 1] == 116) {
-                buffer[index] = 9;/*\t*/
+                buffer[index] = 9;
 
             } else if (input[input_index + 1] == 118) {
-                buffer[index] = 11;/*\v*/
+                buffer[index] = 11;
 
             } else if (input[input_index + 1] == 39) {
-                buffer[index] = 39;/*\'*/
+                buffer[index] = 39;
 
             } else if (input[input_index + 1] == 34) {
-                buffer[index] = 34;/*\"*/
+                buffer[index] = 34;
 
             } else {
                 return ERROR_CODE_INVALID_FORMAT;
@@ -88,7 +88,7 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
     int result = 0;
     unsigned int index = 0;
 
-    char escape_buffer[BUFFER_SIZE] = { 0, };
+    char escape_buffer[BUFFER_SIZE * 2] = { 0, };
     unsigned int escape_index = 0;
     unsigned int length;
 
@@ -163,8 +163,8 @@ int translate(int argc, const char** argv)
 {
     int result = 0;
 
-    char target[BUFFER_SIZE] = { 0, };
-    char replace[BUFFER_SIZE] = { 0, };
+    char target[BUFFER_SIZE * 2] = { 0, };
+    char replace[BUFFER_SIZE * 2] = { 0, };
 
     char convert_characters[128] = { 0, };
     int input_ch;
