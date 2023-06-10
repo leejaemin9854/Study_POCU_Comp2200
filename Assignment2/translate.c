@@ -22,6 +22,10 @@ int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
     unsigned int input_index;
     size_t length = strlen(input);
 
+    if (length > BUFFER_SIZE) {
+        length = BUFFER_SIZE;
+    }
+
     index = 0;
     input_index = 0;
     while (input_index < length) {
@@ -100,6 +104,9 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
     }
 
     length = strlen(escape_buffer);
+    if (length > BUFFER_SIZE) {
+        length = BUFFER_SIZE;
+    }
 
     while (escape_index < length) {
 
