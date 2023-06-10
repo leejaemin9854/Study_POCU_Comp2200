@@ -22,10 +22,6 @@ int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
     unsigned int input_index;
     size_t length = strlen(input);
 
-    if (length > BUFFER_SIZE) {
-        length = BUFFER_SIZE;
-    }
-
     index = 0;
     input_index = 0;
     while (input_index < length) {
@@ -38,34 +34,34 @@ int escape_convert(char* buffer, unsigned int buffer_size, const char* input)
         if (input[input_index] == 92) {
 
             if (input[input_index + 1] == 92) {
-                buffer[index] = 92;
+                buffer[index] = 92; /*\\*/
 
             } else if (input[input_index + 1] == 97) {
-                buffer[index] = 7;
+                buffer[index] = 7; /*\a*/
 
             } else if (input[input_index + 1] == 98) {
-                buffer[index] = 8;
+                buffer[index] = 8; /*\b*/
 
             } else if (input[input_index + 1] == 102) {
-                buffer[index] = 12;
+                buffer[index] = 12; /*\f*/
 
             } else if (input[input_index + 1] == 110) {
-                buffer[index] = 10;
+                buffer[index] = 10; /*\n*/
 
             } else if (input[input_index + 1] == 114) {
-                buffer[index] = 13;
+                buffer[index] = 13; /*\r*/
 
             } else if (input[input_index + 1] == 116) {
-                buffer[index] = 9;
+                buffer[index] = 9; /*\t*/
 
             } else if (input[input_index + 1] == 118) {
-                buffer[index] = 11;
+                buffer[index] = 11; /*\v*/
 
             } else if (input[input_index + 1] == 39) {
-                buffer[index] = 39;
+                buffer[index] = 39; /*\'*/
 
             } else if (input[input_index + 1] == 34) {
-                buffer[index] = 34;
+                buffer[index] = 34; /*\"*/
 
             } else {
                 return ERROR_CODE_INVALID_FORMAT;
@@ -92,7 +88,7 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
     int result = 0;
     unsigned int index = 0;
 
-    char escape_buffer[BUFFER_SIZE * 2] = { 0, };
+    char escape_buffer[BUFFER_SIZE + 1] = { 0, };
     unsigned int escape_index = 0;
     unsigned int length;
 
@@ -104,9 +100,6 @@ int convert_string(char* buffer, unsigned int buffer_size, const char* argv)
     }
 
     length = strlen(escape_buffer);
-    if (length > BUFFER_SIZE) {
-        length = BUFFER_SIZE;
-    }
 
     while (escape_index < length) {
 
@@ -170,8 +163,8 @@ int translate(int argc, const char** argv)
 {
     int result = 0;
 
-    char target[BUFFER_SIZE * 2] = { 0, };
-    char replace[BUFFER_SIZE * 2] = { 0, };
+    char target[BUFFER_SIZE + 1] = { 0, };
+    char replace[BUFFER_SIZE + 1] = { 0, };
 
     char convert_characters[128] = { 0, };
     int input_ch;
