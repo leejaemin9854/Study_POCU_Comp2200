@@ -55,8 +55,7 @@ char** tokenize_malloc(const char* str, const char* delim)
                 result[index++] = token;
 
                 ptr++;
-            }
-            else {
+            } else {
                 while (inchar(*ptr, delim)) {
                     if (*ptr == 0) {
                         break;
