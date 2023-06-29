@@ -2,6 +2,7 @@
 #include <string.h>
 #include "tokenize.h"
 
+
 int inchar(const char ch, const char* str)
 {
 	while (*str != 0) {
@@ -73,6 +74,7 @@ char** tokenize_malloc(const char* str, const char* delim)
 
 		result[index++] = token;
 	}
+	result[index] = NULL;
 
 	return result;
 }
