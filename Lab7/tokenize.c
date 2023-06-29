@@ -38,10 +38,10 @@ char** tokenize_malloc(const char* str, const char* delim)
 			token_len++;
 		}
 	}
-	token_len++;// '\0'
+	token_len++;
 	
-	result = (char**)malloc(token_len * sizeof(char*) + 1);
-	
+	result = (char**)malloc((token_len + 1) * sizeof(char*));
+
 	ptr = str;
 	index = 0;
 	while (*ptr != 0) {
