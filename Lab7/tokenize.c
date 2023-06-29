@@ -73,8 +73,6 @@ char** tokenize_malloc(const char* str, const char* delim)
 
 		result[index++] = token;
 	}
-	token = (char*)calloc(1, 1);
-	result[index] = token;
 
 	return result;
 }
