@@ -29,7 +29,7 @@ size_t find_matching_parentheses(ringbuffer_t* ringbuffer, const char* str)
 	unsigned int str_index = 0;
 
 	char* par_stack;
-	char* par_index_stack;
+	unsigned int* par_index_stack;
 	size_t stack_index = 0;
 
 	char open_parent[] = { '{','(','[','<' }, close_parent[] = { '}',')',']','>' };
@@ -38,7 +38,7 @@ size_t find_matching_parentheses(ringbuffer_t* ringbuffer, const char* str)
 
 	str_size = strlen(str);
 	par_stack = malloc(sizeof(char) * str_size);
-	par_index_stack = malloc(sizeof(char) * str_size);
+	par_index_stack = malloc(sizeof(unsigned int) * str_size);
 	
 	while (str[str_index] != '\0') {
 
