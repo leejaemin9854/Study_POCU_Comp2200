@@ -14,7 +14,7 @@ int char_in_str(const char ch, const char* str)
     return 0;
 }
 
-int abs(const int num1, const int num2)
+int compute_abs(const int num1, const int num2)
 {
     return num1 >= num2 ? num1 - num2 : num2 - num1;
 }
@@ -54,7 +54,7 @@ size_t find_matching_parentheses(ringbuffer_t* ringbuffer, const char* str)
 
             for (i = stack_index - 1; i >= 0; i--) {
 
-                if (abs(str[str_index], par_stack[i]) < 3) {
+                if (compute_abs(str[str_index], par_stack[i]) < 3) {
 					
                     ringbuffer->parentheses[result % ringbuffer->max_size].opening_index = par_index_stack[i];
                     ringbuffer->parentheses[result % ringbuffer->max_size].closing_index = str_index;
