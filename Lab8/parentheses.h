@@ -16,7 +16,7 @@ typedef struct {
 
 int char_in_str(const char ch, const char* str);
 
-int math_abs(const int num1, const int num2);
+int abs(const int num1, const int num2);
 
 size_t find_matching_parentheses(ringbuffer_t* ringbuffer, const char* str);
 
