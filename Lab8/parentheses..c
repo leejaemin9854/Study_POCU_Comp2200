@@ -5,92 +5,90 @@
 
 int char_in_str(const char ch, const char* str)
 {
-	while (*str != '\0') {
-		if (ch == *str++) {
-			return 1;
-		}
-	}
+    while (*str != '\0') {
+        if (ch == *str++) {
+            return 1;
+        }
+    }
 
-	return 0;
+    return 0;
 }
 
 int math_abs(const int num1, const int num2)
 {
-	return num1 >= num2 ? num1 - num2 : num2 - num1;
+    return num1 >= num2 ? num1 - num2 : num2 - num1;
 }
 
 
 
 size_t find_matching_parentheses(ringbuffer_t* ringbuffer, const char* str)
 {
-	size_t result = 0;
-	int i;
-	size_t str_size;
-	unsigned int str_index = 0;
+    size_t result = 0;
+    int i;
+    size_t str_size;
+    unsigned int str_index = 0;
 
-	char* par_stack;
-	unsigned int* par_index_stack;
-	size_t stack_index = 0;
+    char* par_stack;
+    unsigned int* par_index_stack;
+    size_t stack_index = 0;
 
-	char open_parent[] = { '{','(','[','<' }, close_parent[] = { '}',')',']','>' };
+    char open_parent[] = "{([<";
+    char close_parent[] = "})]>";
 
-	ringbuffer->start_index = 0;
+    ringbuffer->start_index = 0;
 
-	str_size = strlen(str);
-	par_stack = malloc(sizeof(char) * str_size);
-	par_index_stack = malloc(sizeof(unsigned int) * str_size);
+    str_size = strlen(str);
+    par_stack = malloc(sizeof(char) * str_size);
+    par_index_stack = malloc(sizeof(unsigned int) * str_size);
 	
-	while (str[str_index] != '\0') {
+    while (str[str_index] != '\0') {
 
-		if (char_in_str(str[str_index], open_parent)) {
+        if (char_in_str(str[str_index], open_parent)) {
 
-			par_stack[stack_index] = str[str_index];
-			par_index_stack[stack_index] = str_index;
+            par_stack[stack_index] = str[str_index];
+            par_index_stack[stack_index] = str_index;
 			
-			stack_index++;
+            stack_index++;
 
-		}
-		else if (char_in_str(str[str_index], close_parent)) {
+        } else if (char_in_str(str[str_index], close_parent)) {
 
-			for (i = stack_index - 1; i >= 0; i--) {
+            for (i = stack_index - 1; i >= 0; i--) {
 
-				if (math_abs(str[str_index], par_stack[i]) < 3) {
+                if (math_abs(str[str_index], par_stack[i]) < 3) {
 					
-					ringbuffer->parentheses[result % ringbuffer->max_size].opening_index = par_index_stack[i];
-					ringbuffer->parentheses[result % ringbuffer->max_size].closing_index = str_index;
+                    ringbuffer->parentheses[result % ringbuffer->max_size].opening_index = par_index_stack[i];
+                    ringbuffer->parentheses[result % ringbuffer->max_size].closing_index = str_index;
 
-					result++;
+                    result++;
+                    
+                    par_stack[i] = par_stack[stack_index - 1];
+                    par_index_stack[i] = par_index_stack[stack_index - 1];
 
-					while (i < stack_index - 1) {
-						par_stack[i] = par_stack[i + 1];
-						par_index_stack[i] = par_index_stack[i + 1];
-						i++;
-					}
-					stack_index--;
+                    stack_index--;
 
-					break;
-				}
+                    break;
+                }
 				
 
 
-			}
+            }
 
-		}
+        }
 
-		str_index++;
-	}
-
-
-	free(par_stack);
-	par_stack = NULL;
-
-	free(par_index_stack);
-	par_index_stack = NULL;
+        str_index++;
+    }
 
 
-	if (result > ringbuffer->max_size) {
-		ringbuffer->start_index = result % ringbuffer->max_size;
-	}
+    free(par_stack);
+    par_stack = NULL;
+
+    free(par_index_stack);
+    par_index_stack = NULL;
+
+
+    if (result > ringbuffer->max_size) {
+        ringbuffer->start_index = result % ringbuffer->max_size;
+    }
 	
-	return result;
+    return result;
 }
