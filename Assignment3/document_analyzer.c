@@ -80,12 +80,11 @@ void set_document_memory(void)
 
 	}
 	cnt++;
-	g_document = (char****)malloc(cnt * sizeof(char***));
-
+	g_document = (char****)malloc((cnt + 1) * sizeof(char***));
 
 	/*sentence size set*/
 	ptr = g_document_str;
-	for (i = 0; i < _msize(g_document) / sizeof(char***); i++) {
+	for (i = 0; i < (_msize(g_document) / sizeof(char***)) - 1; i++) {
 
 		cnt = 0;
 		while (*ptr != '\0') {
@@ -106,51 +105,10 @@ void set_document_memory(void)
 
 		}
 		g_document[i] = (char***)malloc(cnt * sizeof(char**));
-
 	}
 
 
-	/*word size set*/
-	ptr = g_document_str;
-	for (i = 0; i < _msize(g_document) / sizeof(char***); i++) {
-
-		for (j = 0; j < _msize(g_document[i]) / sizeof(char**); j++) {
-
-			cnt = 0;
-			while (*ptr != '\0') {
-
-				if (char_in_str(*ptr, delims_sentence)) {
-
-					while (!(isAlpha(*ptr) || isNum(*ptr)) && *ptr != '\0') {
-						ptr++;
-					}
-
-					break;
-				}
-				else {
-
-					if (char_in_str(*ptr, delims_word)) {
-						
-						cnt++;
-
-						while (char_in_str(*ptr, delims_word)) {
-							ptr++;
-						}
-					}
-					else {
-						ptr++;
-					}
-
-				}
-
-
-			}
-			g_document[i][j] = (char**)malloc((cnt + 1) * sizeof(char*));
-
-		}
-
-
-	}
+	
 
 	return;
 }
