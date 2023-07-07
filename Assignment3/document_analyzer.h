@@ -4,10 +4,6 @@
 #define TRUE (1)
 #define FALSE (0)
 
-#define delims_word (" ,")
-#define delims_sentence (".!?")
-#define delims_paragraph ("\n\r")
-
 void Test_Show_Memory(void);
 
 void Test_Show_Word(void);
