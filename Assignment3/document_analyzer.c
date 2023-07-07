@@ -300,35 +300,7 @@ int load_document(const char* document)
 
 void dispose(void)
 {
-	int i = 0, j = 0, k = 0;
-
-	if (g_document == NULL) {
-		return;
-	}
-
-	free(g_document_str);
-	g_document_str = NULL;
-
-	free(g_document);
-	g_document = NULL;
-
-	for (i = 0; i < _msize(g_document) / sizeof(char***); i++) {
-
-		for (j = 0; j < _msize(g_document[i]) / sizeof(char**); j++) {
-
-
-			for (k = 0; k < _msize(g_document[i][j]) / sizeof(char*); k++) {
-
-				free(g_document[i][j][k]);
-			}
-
-			free(g_document[i][j]);
-		}
-
-		free(g_document[i]);
-	}
-	free(g_document);
-	g_document = NULL;
+	return;
 }
 
 
@@ -443,15 +415,9 @@ int print_as_tree(const char* filename)
 	unsigned int i, j, k;
 
 	FILE* fp;
-	fp = fopen(filename, "r");
-
-	if (fp == NULL) {
+	if (get_total_word_count() == 0) {
 		return 0;
 	}
-	else {
-		fclose(fp);
-	}
-
 
 	fp = fopen(filename, "w");
 
