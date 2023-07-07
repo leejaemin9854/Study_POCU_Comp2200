@@ -162,6 +162,10 @@ void set_document_word(void)
 
 int load_document(const char* document)
 {
+	if (set_document_string(document) == 0) {
+		return 0;
+	}
+	
 	
 
 	return 0;
