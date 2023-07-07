@@ -125,7 +125,11 @@ void set_document_memory(void)
 		}
 		
 	}
-	cnt += 1;
+
+	if (cnt != 0) {
+		cnt += 1;
+	}
+
 	g_document = malloc(sizeof(char***) * cnt);
 	
 	ptr = g_document_str;
@@ -291,7 +295,7 @@ int load_document(const char* document)
 	
 	set_document_word();
 
-	return 0;
+	return 1;
 }
 
 void dispose(void)
@@ -436,5 +440,45 @@ unsigned int get_sentence_word_count(const char** sentence)
 
 int print_as_tree(const char* filename)
 {
-	return 0;
+	unsigned int i, j, k;
+
+	FILE* fp;
+	fp = fopen(filename, "r");
+
+	if (fp == NULL) {
+		return 0;
+	}
+	else {
+		fclose(fp);
+	}
+
+
+	fp = fopen(filename, "w");
+
+
+	for (i = 0; i < _msize(g_document) / sizeof(char***); i++) {
+
+		fprintf(fp, "Paragraph %d:\n", i);
+
+		for (j = 0; j < _msize(g_document[i]) / sizeof(char**); j++) {
+
+			fprintf(fp, "    Sentence %d:\n", j);
+
+			for (k = 0; k < _msize(g_document[i][j]) / sizeof(char*); k++) {
+
+				fprintf(fp, "        %s\n", g_document[i][j][k]);
+
+			}
+
+		}
+
+		fprintf(fp, "\n");
+
+	}
+	
+
+	fclose(fp);
+
+
+	return 1;
 }
