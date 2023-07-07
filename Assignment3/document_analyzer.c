@@ -83,6 +83,34 @@ void set_document_memory(void)
 	g_document = malloc(cnt * sizeof(char***));
 
 
+	/*sentence size set*/
+	ptr = g_document_str;
+	for (i = 0; i < _msize(g_document) / sizeof(char***); i++) {
+
+		cnt = 0;
+		while (*ptr != '\0') {
+			
+			if (char_in_str(*ptr, delims_paragraph)) {
+
+				while (char_in_str(*ptr, delims_paragraph) && *ptr != '\0') {
+					ptr++;
+				}
+				break;
+			}
+			else {
+				if (char_in_str(*ptr, delims_sentence)) {
+					cnt++;
+				}
+				ptr++;
+			}
+
+		}
+		g_document[i] = malloc(cnt * sizeof(char**));
+
+	}
+
+
+	
 
 	return;
 }
