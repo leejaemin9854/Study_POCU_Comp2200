@@ -93,7 +93,6 @@ void set_document_memory(void)
 	}
 
 
-
 	return;
 }
 
