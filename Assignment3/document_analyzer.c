@@ -89,7 +89,7 @@ void set_document_memory(void)
 
 
 
-	for (i = 0; i < (_msize(g_document) / sizeof(char***)); i++) {
+	for (i = 0; i < (_msize(g_document) / sizeof(char***)) - 1; i++) {
 
 		g_document[i] = malloc(1 * sizeof(char**));
 
