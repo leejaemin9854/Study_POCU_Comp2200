@@ -112,7 +112,7 @@ int load_document(const char* document)
 
 
     
-
+    
 
 
     free(document_str);
@@ -122,6 +122,53 @@ int load_document(const char* document)
     return TRUE;
 }
 
+void dispose(void)
+{
+    return;
+}
 
+unsigned int get_total_word_count(void)
+{
+    return 0;
+}
 
+unsigned int get_total_sentence_count(void)
+{
+    return 0;
+}
+
+unsigned int get_total_paragraph_count(void)
+{
+    return 0;
+}
+
+const char*** get_paragraph_or_null(const unsigned int paragraph_index)
+{
+    return NULL;
+}
+
+unsigned int get_paragraph_word_count(const char*** paragraph)
+{
+    return 0;
+}
+
+unsigned int get_paragraph_sentence_count(const char*** paragraph)
+{
+    return 0;
+}
+
+const char** get_sentence_or_null(const unsigned int paragraph_index, const unsigned int sentence_index)
+{
+    return NULL;
+}
+
+unsigned int get_sentence_word_count(const char** sentence)
+{
+    return 0;
+}
+
+int print_as_tree(const char* filename)
+{
+    return 0;
+}
 
