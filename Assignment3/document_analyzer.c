@@ -87,10 +87,9 @@ void set_document_memory(void)
 	cnt++;
 	g_document = calloc(sizeof(char***), cnt);
 
-
-	for (i = 0; i < _msize(g_document) / sizeof(char***); i++) {
-		g_document[i] = malloc(1 * sizeof(char**));
-	}
+	g_document[0] = malloc(1 * sizeof(char**));
+	g_document[1] = malloc(1 * sizeof(char**));
+	g_document[2] = malloc(1 * sizeof(char**));
 
 
 	return;
