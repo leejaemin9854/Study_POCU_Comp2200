@@ -87,7 +87,8 @@ void set_document_memory(void)
 	cnt++;
 	g_document = malloc(cnt * sizeof(char***));
 
-
+	/*Test Code*/
+	g_document[0] = malloc(1 * sizeof(char**));
 	
 
 	return;
