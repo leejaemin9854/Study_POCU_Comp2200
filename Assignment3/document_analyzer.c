@@ -300,6 +300,18 @@ int load_document(const char* document)
 
 void dispose(void)
 {
+	unsigned int i, j;
+	for (i = 0; i < _msize(g_document) / sizeof(char***); i++) {
+		for (j = 0; j < _msize(g_document[i]) / sizeof(char**); j++) {
+
+			free(g_document[i][j]);
+
+		}
+		free(g_document[i]);
+	}
+	free(g_document);
+
+
 	return;
 }
 
