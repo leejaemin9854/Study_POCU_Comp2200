@@ -4,9 +4,10 @@
 #define TRUE (1)
 #define FALSE (0)
 
-void Test_Show_Memory(void);
+#define delims_word (" ,")
+#define delims_sentence (".!?")
+#define delims_paragraph ("\n\r")
 
-void Test_Show_Word(void);
 
 int isAlpha(const char ch);
 
