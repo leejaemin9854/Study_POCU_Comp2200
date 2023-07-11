@@ -22,7 +22,7 @@ void set_func(int* ary, int start, int count, int value)
 
 }
 
-#define SET(ary, start, count, value) set_func(ary, start, count, value);
+#define SET(ary, start, count, value) set_func((int*)ary, (int)start, (int)count, (int)value);
 
 
 
