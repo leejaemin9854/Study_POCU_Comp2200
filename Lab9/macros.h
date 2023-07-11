@@ -7,18 +7,10 @@
 
 #define ABS(x) (x >= 0 ? x : x * -1)
 
-#define RANGE(curr, min, max)		\
-	curr=min-1;						\
-	while(curr++<=max)				\
+#define RANGE(curr, min, max)
 
 
-#define RANGE_DESC(curr, max, min)		\
-	curr=max+1;							\
-	while(curr-->=min)					\
-
-
-#define RANGE_DESCS(curr, max, min) for(curr=max; curr>=min; curr--)
-
+#define RANGE_DESC(curr, max, min)
 
 
 #define SET(ary, start, count, value) set_func((int*)ary, (int)start, (int)count, (int)value);
