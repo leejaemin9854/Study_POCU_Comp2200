@@ -8,6 +8,9 @@
 #define delims_sentence (".!?")
 #define delims_paragraph ("\n\r")
 
+void Test_Show_Memory(void);
+
+void Test_Show_Word(void);
 
 int isAlpha(const char ch);
 

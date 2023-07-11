@@ -125,13 +125,10 @@ void set_document_memory(void)
 		}
 
 	}
-
-	if (cnt != 0) {
-		cnt += 1;
-	}
-
+	cnt++;
+	
 	g_document = malloc(sizeof(char***) * cnt);
-
+	printf("_msize: %u\n", _msize(g_document));
 	ptr = g_document_str;
 	for (i = 0; i < _msize(g_document) / sizeof(char***); i++) {
 
