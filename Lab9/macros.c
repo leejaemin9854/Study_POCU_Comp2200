@@ -21,8 +21,7 @@ void set_func(void* ary, int start, int count, double value_double, unsigned int
         }
 
 
-    }
-    else if (size == sizeof(short)) {
+    } else if (size == sizeof(short)) {
 
         for (i = start; i < start + count; i++) {
 
@@ -30,8 +29,7 @@ void set_func(void* ary, int start, int count, double value_double, unsigned int
 
         }
 
-    }
-    else if (size == sizeof(int) || size == sizeof(float)) {
+    } else if (size == sizeof(int) || size == sizeof(float)) {
         
         for (i = start; i < start + count; i++) {
 
@@ -43,8 +41,7 @@ void set_func(void* ary, int start, int count, double value_double, unsigned int
         }
 
 
-    }
-    else if (size == sizeof(double)) {
+    } else {
 
         for (i = start; i < start + count; i++) {
 
@@ -53,7 +50,6 @@ void set_func(void* ary, int start, int count, double value_double, unsigned int
         }
 
     }
-
 
 
 }
