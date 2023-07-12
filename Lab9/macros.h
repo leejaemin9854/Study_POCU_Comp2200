@@ -13,15 +13,7 @@
 
 #define SET(ary, start, count, value) 0
 
-int set_ary(int* ary, int start, int count, int value)
-{
-	int i = start;
-	for (; i < start + count; i++) {
-		ary[i] = value;
-	}
 
-	return 1;
-}
 
 
 #endif /* MACROS_H */
