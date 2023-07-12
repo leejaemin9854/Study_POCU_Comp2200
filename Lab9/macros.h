@@ -11,11 +11,11 @@
 
 #define RANGE_DESC(curr, max, min) for((curr) = (max); (curr) >= (min); (curr)--)
 
-int set_func(int* ary, int start, int count, int value);
+int set_ary(int* ary, int start, int count, int value);
 
-#define SET(ary, start, count, value) (set_func((int*)(ary), (int)(start), (int)(count), (int)(value)))
+#define SET(ary, start, count, value) (set_ary((int*)(ary), (int)(start), (int)(count), (int)(value)))
 
-int set_func(int* ary, int start, int count, int value)
+int set_ary(int* ary, int start, int count, int value)
 {
 	int i = start;
 	for (; i < start + count; i++) {
