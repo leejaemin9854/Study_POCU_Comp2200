@@ -11,7 +11,7 @@
 
 #define RANGE_DESC(curr, max, min) for((curr) = (max); (curr) >= (min); (curr)--)
 
-#define SET(ary, start, count, value) (set_ary((int*)(ary), (int)(start), (int)(count), (int)(value)))
+#define SET(ary, start, count, value) 0
 
 int set_ary(int* ary, int start, int count, int value)
 {
