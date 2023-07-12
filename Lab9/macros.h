@@ -21,9 +21,6 @@
 		case sizeof(short) :											\
 			set_func_short((short*)(ary), (start), (count), (value));	\
 			break;														\
-		case sizeof(int) :												\
-			set_func_int((int*)(ary), (start), (count), (value));		\
-			break;														\
 		case sizeof(float) :											\
 			set_func_float((float*)(ary), (start), (count), (value));	\
 			break;														\
