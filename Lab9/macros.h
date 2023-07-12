@@ -11,9 +11,23 @@
 
 #define RANGE_DESC(curr, max, min) for((curr) = (max); (curr) >= (min); (curr)--)
 
-#define SET(ary, start, count, value) 0
+#define SET(ary, start, count, value) set_func((int*)(ary), (int)(start), (int)(count), (int)(value));
+
+#ifndef SET_FUNC_DEFINE
+#define SET_FUNC_DEFINE
+void set_func(int* ary, int start, int count, int value);
 
 
+void set_func(int* ary, int start, int count, int value)
+{
+	int i = start;
+	for (; i < start + count; i++) {
+		ary[i] = value;
+	}
+
+}
+
+#endif
 
 
 #endif /* MACROS_H */
