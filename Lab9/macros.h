@@ -11,8 +11,53 @@
 
 #define RANGE_DESC(curr, max, min) for((curr) = (max); (curr) >= (min); (curr)--)
 
-#define SET(ary, start, count, value) set_func((int*)(ary), (int)(start), (int)(count), (int)(value))
+#define SET(ary, start, count, value)									\
+{																		\
+	switch (sizeof(value))												\
+	{																	\
+		case sizeof(char) :												\
+			set_func_char((char*)(ary), (start), (count), (value));		\
+			break;														\
+		case sizeof(short) :											\
+			set_func_short((short*)(ary), (start), (count), (value));	\
+			break;														\
+		case sizeof(int) :												\
+			set_func_int((int*)(ary), (start), (count), (value));		\
+			break;														\
+		case sizeof(float) :											\
+			set_func_float((float*)(ary), (start), (count), (value));	\
+			break;														\
+		case sizeof(double) :											\
+			set_func_double((double*)(ary), (start), (count), (value));	\
+			break;														\
+	}																	\
+}																		\
 
-void set_func(int* ary, int start, int count, int value);
+
+#define SET_FUNC_HEAD_DECLARE	\
+	SET_FUNC(char)				\
+	SET_FUNC(short)				\
+	SET_FUNC(int)				\
+	SET_FUNC(float)				\
+	SET_FUNC(double)			\
+
+
+#define SET_FUNC(type)														\
+void set_func_##type(type* ary, int start, int count, type value);			\
+
+SET_FUNC_HEAD_DECLARE
+
+#undef SET_FUNC
+
+
+#define SET_FUNC(type)														\
+void set_func_##type(type* ary, int start, int count, type value)			\
+{																			\
+	int i;																	\
+	for (i = start; i < start + count; i++) {								\
+		ary[i] = value;														\
+	}																		\
+}																			\
+
 
 #endif /* MACROS_H */
