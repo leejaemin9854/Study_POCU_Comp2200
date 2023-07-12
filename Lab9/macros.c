@@ -4,20 +4,10 @@
 /*
 SET_FUNC_HEAD_DECLARE
 */
-void set_funcss(int* ary, int start, int count, int value)
+
+void set_func(void* ary, int start, int count, char value_char, short value_short, float value_float, double value_double, unsigned int size)
 {
     int i = start;
-
-    for (; i < start + count; i++) {
-        ary[i] = value;
-    }
-
-}
-
-void set_func(void* ary, int start, int count, char value_char, short value_short, int value_int, float value_float, double value_double, unsigned int size)
-{
-    int i = start;
-
 
 
     if (size == sizeof(char)) {
@@ -43,7 +33,7 @@ void set_func(void* ary, int start, int count, char value_char, short value_shor
 
         for (i = start; i < start + count; i++) {
             
-            ((int*)ary)[i] = value_int;
+            ((float*)ary)[i] = value_float;
 
         }
 

@@ -1,6 +1,19 @@
 #ifndef MACROS_H
 #define MACROS_H
 
+
+typedef union {
+	int value_int;
+	float value_float;
+}int_float_t;
+
+typedef struct {
+
+	char value[4];
+
+}test_t;
+
+
 #define MAX(x, y) ((x) >= (y) ? (x) : (y))
 
 #define MIN(x, y) ((x) <= (y) ? (x) : (y))
@@ -11,9 +24,12 @@
 
 #define RANGE_DESC(curr, max, min) for((curr) = (max); (curr) >= (min); (curr)--)
 
-#define SET(ary, start, count, value) set_func((void*)(ary), (int)(start), (int)(count), (char)(value), (short)(value), (int)value, (float)value, (double)(value), sizeof(value))
+#define SET(ary, start, count, value) set_func((void*)(ary), (int)(start), (int)(count), (char)(value), (short)(value), (float)value, (double)(value), sizeof(value))
 
-void set_func(void* ary, int start, int count, char value_char, short value_short, int value_int, float value_float, double value_double, unsigned int size);
+void set_func(void* ary, int start, int count, char value_char, short value_short, float value_float, double value_double, unsigned int size);
+
+
+
 
 /*
 {																		\
