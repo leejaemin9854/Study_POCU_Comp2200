@@ -13,7 +13,7 @@
 
 int set_func(int* ary, int start, int count, int value);
 
-#define SET(ary, start, count, value) (set_func((int*)(ary), (int)(start), (int)(count), (int)(value)));
+#define SET(ary, start, count, value) (set_func((int*)(ary), (int)(start), (int)(count), (int)(value)))
 
 int set_func(int* ary, int start, int count, int value)
 {
