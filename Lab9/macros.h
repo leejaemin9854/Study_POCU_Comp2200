@@ -1,11 +1,11 @@
 #ifndef MACROS_H
 #define MACROS_H
 
-#define MAX(x, y) (0)
+#define MAX(x, y) (x >= y ? x : y)
 
-#define MIN(x, y) (0)
+#define MIN(x, y) (x <= y ? x : y)
 
-#define ABS(x) (0)
+#define ABS(x) (x >= 0 ? x : x * -1)
 
 #define RANGE(curr, min, max)
 
