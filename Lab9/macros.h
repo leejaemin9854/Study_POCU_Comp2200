@@ -24,35 +24,9 @@ typedef struct {
 
 #define RANGE_DESC(curr, max, min) for((curr) = (max); (curr) >= (min); (curr)--)
 
-#define SET(ary, start, count, value) set_func((void*)(ary), (int)(start), (int)(count), (char)(value), (short)(value), (float)value, (double)(value), sizeof(value))
+#define SET(ary, start, count, value) set_func((void*)(ary), (int)(start), (int)(count), (double)(value), sizeof(value))
 
-void set_func(void* ary, int start, int count, char value_char, short value_short, float value_float, double value_double, unsigned int size);
-
-
-
-
-/*
-{																		\
-	switch (sizeof(value))												\
-	{																	\
-		case sizeof(char) :												\
-			set_func_char((char*)(ary), (start), (count), (value));		\
-			break;														\
-		case sizeof(short) :											\
-			set_func_short((short*)(ary), (start), (count), (value));	\
-			break;														\
-		case sizeof(int) :												\
-			set_func_int((int*)(ary), (start), (count), (value));		\
-			break;														\
-		case sizeof(float) :											\
-			set_func_float((float*)(ary), (start), (count), (value));	\
-			break;														\
-		case sizeof(double) :											\
-			set_func_double((double*)(ary), (start), (count), (value));	\
-			break;														\
-	}																	\
-}																		\
-*/
+void set_func(void* ary, int start, int count, double value_double, unsigned int size);
 
 #define SET_FUNC_HEAD_DECLARE	\
 	SET_FUNC(char)				\
