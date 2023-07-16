@@ -5,7 +5,7 @@
 
 #define MIN(x, y) ((x) <= (y) ? (x) : (y))
 
-#define ABS(x) ((x) >= 0 ? (x) : (x) * -1)
+#define ABS(x) (0)
 
 #define RANGE(curr, min, max) for((curr) = (min); (curr) <= (max); (curr)++)
 
