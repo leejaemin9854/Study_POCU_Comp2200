@@ -34,9 +34,9 @@ void set_func(void* ary, int start, int count, double value_double, unsigned int
         for (i = start; i < start + count; i++) {
 
             if (is_inteager) {
-                ((int*)ary)[i] = value_double;
+                ((int*)ary)[i] = (int)value_double;
             } else {
-                ((float*)ary)[i] = value_double;
+                ((float*)ary)[i] = (float)value_double;
             }
         }
 
