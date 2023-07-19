@@ -44,8 +44,7 @@ void test(void)
     finalize_todo_list(&todo_list);
 }
 
-
-int main(void)
+void test2(void)
 {
     todo_list_t todo_list = init_todo_list(9U);
 
@@ -99,10 +98,32 @@ int main(void)
     assert(!complete_todo(&todo_list));
 
     finalize_todo_list(&todo_list);
+}
+
+int main(void)
+{
+    /*
+    todo_list_t todo_list = init_todo_list(5);
+
+    add_todo(&todo_list, 36, "Do homework"); // [ "Do homework" ]
+    add_todo(&todo_list, 11, "Play games"); // [ "Do homework", "Play games" ]
+    add_todo(&todo_list, 40, "Eat breakfast"); // [ "Do homework", "Play games", "Eat breakfast" ]
+    add_todo(&todo_list, 37, "Change clothes"); // [ "Do homework", "Play games", "Eat breakfast", "Change clothes" ]
+    add_todo(&todo_list, 35, "Brush my teeth"); // [ "Do homework", "Play games", "Eat breakfast", "Change clothes", "Brush my teeth" ]
+
+
+    todo_t* todo = todo_list.todos;
+    printf("{ ");
+    while (todo != NULL) {
+        printf("%s, ", todo->todo_name);
+        todo = todo->ftodo;
+    }
+    printf(" }\n");
+    */
 
     test();
+    test2();
 
     printf("Done");
-
     return 0;
 }
