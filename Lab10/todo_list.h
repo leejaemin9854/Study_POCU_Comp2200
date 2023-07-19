@@ -7,18 +7,18 @@
 
 typedef struct todo {
 
-	char* todo_name;
-	int32_t seq;
+    char* todo_name;
+    int32_t seq;
 
-	struct todo* ftodo;
+    struct todo* ftodo;
 
 } todo_t;
 
 typedef struct todo_list {
 
-	todo_t* todos;
-	int dummy;
-	int max;
+    todo_t* todos;
+    int dummy;
+    int max;
 
 } todo_list_t;
 
