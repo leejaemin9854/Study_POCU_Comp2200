@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 #include <string.h>
 #include "todo_list.h"
@@ -23,7 +24,6 @@ void test(void)
 
     assert(strcmp("A", peek_or_null(&todo_list)) == 0);
     assert(complete_todo(&todo_list));
-
 
     assert(strcmp("B", peek_or_null(&todo_list)) == 0);
     assert(complete_todo(&todo_list));
@@ -102,93 +102,61 @@ void test2(void)
 
 int main(void)
 {
-   /*
-    todo_list_t todo_list = init_todo_list(5);
+    /*
+    todo_list_t todo_list = init_todo_list(10);
 
+    
     add_todo(&todo_list, 36, "Do homework"); // [ "Do homework" ]
     add_todo(&todo_list, 11, "Play games"); // [ "Do homework", "Play games" ]
-    add_todo(&todo_list, 40, "Eat breakfast"); // [ "Do homework", "Play games", "Eat breakfast" ]
+    add_todo(&todo_list, 40, "Eat breakfast"); // [ "Do homework", "Play games", "Eat breakfast" 
     add_todo(&todo_list, 37, "Change clothes"); // [ "Do homework", "Play games", "Eat breakfast", "Change clothes" ]
     add_todo(&todo_list, 35, "Brush my teeth"); // [ "Do homework", "Play games", "Eat breakfast", "Change clothes", "Brush my teeth" ]
 
+    printf("%s\n", peek_or_null(&todo_list));
 
+    complete_todo(&todo_list);
+    
+    printf("%s\n", peek_or_null(&todo_list));
+
+    printf("%s\n", peek_or_null(&todo_list));
+
+    printf("%s\n", peek_or_null(&todo_list));
+
+    complete_todo(&todo_list);
+
+    printf("%s\n", peek_or_null(&todo_list));
+
+    complete_todo(&todo_list);
+
+    printf("%s\n", peek_or_null(&todo_list));
+    complete_todo(&todo_list);
+
+    printf("%s\n", peek_or_null(&todo_list));
+
+    
     todo_t* todo;
     todo = todo_list.todos;
-    printf("{ ");
-    while (todo != NULL) {
-        printf("%s, ", todo->todo_name);
+    printf("{  ");
+    for (int i = 0; i <= todo_list.dummy; i++) {
+        printf("%s, ", todo->name);
         todo = todo->ftodo;
+
     }
-    printf(" }\n%s\n\n", peek_or_null(&todo_list));
+    printf(" }\n\n");
     
     complete_todo(&todo_list);
-
-    todo = todo_list.todos;
-    printf("{ ");
-    while (todo != NULL) {
-        printf("%s, ", todo->todo_name);
-        todo = todo->ftodo;
-    }
-    printf(" }\n%s\n\n", peek_or_null(&todo_list));
-
-    complete_todo(&todo_list);
-
-    todo = todo_list.todos;
-    printf("{ ");
-    while (todo != NULL) {
-        printf("%s, ", todo->todo_name);
-        todo = todo->ftodo;
-    }
-    printf(" }\n%s\n\n", peek_or_null(&todo_list));
+    
 
 
-    complete_todo(&todo_list);
+    finalize_todo_list(&todo_list);
 
-    todo = todo_list.todos;
-    printf("{ ");
-    while (todo != NULL) {
-        printf("%s, ", todo->todo_name);
-        todo = todo->ftodo;
-    }
-    printf(" }\n%s\n\n", peek_or_null(&todo_list));
-
-
-    complete_todo(&todo_list);
-
-    todo = todo_list.todos;
-    printf("{ ");
-    while (todo != NULL) {
-        printf("%s, ", todo->todo_name);
-        todo = todo->ftodo;
-    }
-    printf(" }\n%s\n\n", peek_or_null(&todo_list));
-
-
-    complete_todo(&todo_list);
-
-    todo = todo_list.todos;
-    printf("{ ");
-    while (todo != NULL) {
-        printf("%s, ", todo->todo_name);
-        todo = todo->ftodo;
-    }
-    printf(" }\n%s\n\n", peek_or_null(&todo_list));
-
-
-    complete_todo(&todo_list);
-
-    todo = todo_list.todos;
-    printf("{ ");
-    while (todo != NULL) {
-        printf("%s, ", todo->todo_name);
-        todo = todo->ftodo;
-    }
-    printf(" }\n%s\n\n", peek_or_null(&todo_list));
     */
+
     
     test();
     test2();
     
+
     printf("Done");
     return 0;
 }

@@ -7,7 +7,7 @@
 
 typedef struct todo {
 
-    char* todo_name;
+    char* name;
     int32_t seq;
 
     struct todo* ftodo;
