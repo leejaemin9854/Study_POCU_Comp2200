@@ -11,10 +11,11 @@ todo_list_t init_todo_list(size_t max_size)
     todo_list_t result;
 
     todo_t* head = malloc(sizeof(todo_t));
-    head->name = malloc(sizeof(5));
-    strncpy(head->name, "Head", 4);
-    head->name[4] = '\0';
+    char* str = "head";
 
+    head->name = malloc((strlen(str) + 1) * sizeof(char));
+    strcpy(head->name, str);
+    
     head->seq = INT_MIN;
     head->ftodo = NULL;
 
