@@ -28,7 +28,7 @@ void finalize_todo_list(todo_list_t* todo_list)
     todo_t* dtodo = todo_list->todos;
     while (dtodo != NULL) {
         todo_list->todos = todo_list->todos->ftodo;
-        free(dtodo->todo_name);
+        free(dtodo->name);
         free(dtodo);
         dtodo = todo_list->todos;
     }
@@ -48,9 +48,9 @@ bool add_todo(todo_list_t* todo_list, const int32_t priority, const char* task)
 	
     todo_t* todo = calloc(1, sizeof(todo_t));
     todo->seq = priority;
-    todo->todo_name = calloc(strlen(task) + 1, sizeof(char));
-    strncpy(todo->todo_name, task, strlen(task));
-    todo->todo_name[strlen(task)] = '\0';
+    todo->name = calloc(strlen(task) + 1, sizeof(char));
+    strncpy(todo->name, task, strlen(task));
+    todo->name[strlen(task)] = '\0';
     todo->ftodo = NULL;
 
     if (todo_list->todos == NULL) {
@@ -97,7 +97,7 @@ bool complete_todo(todo_list_t* todo_list)
     
     if (pmax_todo->ftodo == todo_list->todos) {
         todo = todo_list->todos->ftodo;
-        free(todo_list->todos->todo_name);
+        free(todo_list->todos->name);
         free(todo_list->todos);
         todo_list->todos = todo;
     }
@@ -105,7 +105,7 @@ bool complete_todo(todo_list_t* todo_list)
         todo = pmax_todo->ftodo;
         pmax_todo->ftodo = todo->ftodo;
 
-        free(todo->todo_name);
+        free(todo->name);
         free(todo);
     }
     
@@ -130,7 +130,7 @@ const char* peek_or_null(const todo_list_t* todo_list)
         todo = todo->ftodo;
     }
 
-    return max->todo_name;
+    return max->name;
 }
 
 size_t get_count(const todo_list_t* todo_list)
