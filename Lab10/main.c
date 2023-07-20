@@ -72,13 +72,13 @@ void test2(void)
 
     assert(strcmp("F", peek_or_null(&todo_list)) == 0);
     assert(complete_todo(&todo_list));
-
+    
     assert(strcmp("H", peek_or_null(&todo_list)) == 0);
     assert(complete_todo(&todo_list));
 
     assert(strcmp("D", peek_or_null(&todo_list)) == 0);
     assert(complete_todo(&todo_list));
-
+    
     assert(strcmp("B", peek_or_null(&todo_list)) == 0);
     assert(complete_todo(&todo_list));
 
@@ -87,21 +87,56 @@ void test2(void)
 
     assert(strcmp("E", peek_or_null(&todo_list)) == 0);
     assert(complete_todo(&todo_list));
-
+    
     assert(strcmp("A", peek_or_null(&todo_list)) == 0);
     assert(complete_todo(&todo_list));
-
+    
     assert(strcmp("C", peek_or_null(&todo_list)) == 0);
     assert(complete_todo(&todo_list));
 
     assert(is_empty(&todo_list));
     assert(!complete_todo(&todo_list));
-
+    
     finalize_todo_list(&todo_list);
 }
 
 int main(void)
 {
+    /*
+    todo_list_t todo_list = init_todo_list(10);
+    todo_t* todo = NULL;
+
+    add_todo(&todo_list, 36, "Do homework");
+    add_todo(&todo_list, 11, "Play games");
+    add_todo(&todo_list, 45, "Eat breakfast");
+    add_todo(&todo_list, 37, "Change clothes");
+    add_todo(&todo_list, 35, "Brush my teeth");
+    add_todo(&todo_list, 36, "Brush my teeth2");
+    add_todo(&todo_list, 37, "Brush my teeth3");
+    add_todo(&todo_list, 38, "Brush my teeth4");
+    add_todo(&todo_list, 39, "Brush my teeth5");
+    add_todo(&todo_list, 40, "Brush my teeth6");
+
+
+    todo = todo_list.todos;
+    while (todo != NULL) {
+        printf(" - %s\n", todo->name);
+        todo = todo->ftodo;
+    }
+    printf("peek: %s\n\n", peek_or_null(&todo_list));
+
+    complete_todo(&todo_list);
+
+    todo = todo_list.todos;
+    while (todo != NULL) {
+        printf(" - %s\n", todo->name);
+        todo = todo->ftodo;
+    }
+    printf("peek: %s\n\n", peek_or_null(&todo_list));
+    
+    finalize_todo_list(&todo_list);
+    */
+
     /*
     todo_list_t todo_list = init_todo_list(10);
 
