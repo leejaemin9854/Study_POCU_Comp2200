@@ -24,13 +24,13 @@ void finalize_todo_list(todo_list_t* todo_list)
         return;
     }
 	
-	
-    todo_t* dtodo = NULL;
-    while (todo_list->todos != NULL) {
-        dtodo = todo_list->todos;
+
+    todo_t* dtodo = todo_list->todos;
+    while (dtodo != NULL) {
         todo_list->todos = todo_list->todos->ftodo;
         free(dtodo->todo_name);
         free(dtodo);
+        dtodo = todo_list->todos;
     }
 
 
@@ -45,18 +45,6 @@ bool add_todo(todo_list_t* todo_list, const int32_t priority, const char* task)
     if (todo_list->dummy >= todo_list->max) {
         return false;
     }
-
-    if (todo_list->dummy == 0) {
-        todo_t* head = calloc(1, sizeof(todo_t));
-        head->seq = INT_MIN;
-        head->todo_name = calloc(5, sizeof(char));
-        strncpy(head->todo_name, "Head", 4);
-        head->todo_name[4] = '\0';
-        head->ftodo = NULL;
-
-        todo_list->todos = head;
-    }
-
 	
     todo_t* todo = calloc(1, sizeof(todo_t));
     todo->seq = priority;
@@ -65,12 +53,19 @@ bool add_todo(todo_list_t* todo_list, const int32_t priority, const char* task)
     todo->todo_name[strlen(task)] = '\0';
     todo->ftodo = NULL;
 
+    if (todo_list->todos == NULL) {
 
-    todo_t* ptodo = todo_list->todos;
-    while (ptodo->ftodo != NULL) {
-        ptodo = ptodo->ftodo;
+        todo_list->todos = todo;
+
+    } else {
+
+        todo_t* ptodo = todo_list->todos;
+        while (ptodo->ftodo != NULL) {
+            ptodo = ptodo->ftodo;
+        }
+        ptodo->ftodo = todo;
+
     }
-    ptodo->ftodo = todo;
 
     todo_list->dummy++;
 
@@ -84,8 +79,11 @@ bool complete_todo(todo_list_t* todo_list)
         return false;
     }
 	
-	
-    todo_t* todo = todo_list->todos;
+    todo_t head;
+    head.seq = INT_MIN;
+    head.ftodo = todo_list->todos;
+
+    todo_t* todo = &head;
     todo_t* pmax_todo = todo;
 
     while (todo->ftodo != NULL) {
@@ -94,14 +92,23 @@ bool complete_todo(todo_list_t* todo_list)
             pmax_todo = todo;
         }
         todo = todo->ftodo;
+
     }
+    
+    if (pmax_todo->ftodo == todo_list->todos) {
+        todo = todo_list->todos->ftodo;
+        free(todo_list->todos->todo_name);
+        free(todo_list->todos);
+        todo_list->todos = todo;
+    }
+    else {
+        todo = pmax_todo->ftodo;
+        pmax_todo->ftodo = todo->ftodo;
 
-    todo = pmax_todo->ftodo;
-    pmax_todo->ftodo = todo->ftodo;
-
-    free(todo->todo_name);
-    free(todo);
-	
+        free(todo->todo_name);
+        free(todo);
+    }
+    
     todo_list->dummy--;
     return true;
 }
@@ -114,8 +121,7 @@ const char* peek_or_null(const todo_list_t* todo_list)
 
     todo_t* todo = todo_list->todos;
     todo_t* max = todo;
-    todo = todo->ftodo;
-
+    
     while (todo != NULL) {
         if (todo->seq > max->seq) {
             max = todo;

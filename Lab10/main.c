@@ -102,7 +102,7 @@ void test2(void)
 
 int main(void)
 {
-    /*
+   /*
     todo_list_t todo_list = init_todo_list(5);
 
     add_todo(&todo_list, 36, "Do homework"); // [ "Do homework" ]
@@ -112,18 +112,83 @@ int main(void)
     add_todo(&todo_list, 35, "Brush my teeth"); // [ "Do homework", "Play games", "Eat breakfast", "Change clothes", "Brush my teeth" ]
 
 
-    todo_t* todo = todo_list.todos;
+    todo_t* todo;
+    todo = todo_list.todos;
     printf("{ ");
     while (todo != NULL) {
         printf("%s, ", todo->todo_name);
         todo = todo->ftodo;
     }
-    printf(" }\n");
-    */
+    printf(" }\n%s\n\n", peek_or_null(&todo_list));
+    
+    complete_todo(&todo_list);
 
+    todo = todo_list.todos;
+    printf("{ ");
+    while (todo != NULL) {
+        printf("%s, ", todo->todo_name);
+        todo = todo->ftodo;
+    }
+    printf(" }\n%s\n\n", peek_or_null(&todo_list));
+
+    complete_todo(&todo_list);
+
+    todo = todo_list.todos;
+    printf("{ ");
+    while (todo != NULL) {
+        printf("%s, ", todo->todo_name);
+        todo = todo->ftodo;
+    }
+    printf(" }\n%s\n\n", peek_or_null(&todo_list));
+
+
+    complete_todo(&todo_list);
+
+    todo = todo_list.todos;
+    printf("{ ");
+    while (todo != NULL) {
+        printf("%s, ", todo->todo_name);
+        todo = todo->ftodo;
+    }
+    printf(" }\n%s\n\n", peek_or_null(&todo_list));
+
+
+    complete_todo(&todo_list);
+
+    todo = todo_list.todos;
+    printf("{ ");
+    while (todo != NULL) {
+        printf("%s, ", todo->todo_name);
+        todo = todo->ftodo;
+    }
+    printf(" }\n%s\n\n", peek_or_null(&todo_list));
+
+
+    complete_todo(&todo_list);
+
+    todo = todo_list.todos;
+    printf("{ ");
+    while (todo != NULL) {
+        printf("%s, ", todo->todo_name);
+        todo = todo->ftodo;
+    }
+    printf(" }\n%s\n\n", peek_or_null(&todo_list));
+
+
+    complete_todo(&todo_list);
+
+    todo = todo_list.todos;
+    printf("{ ");
+    while (todo != NULL) {
+        printf("%s, ", todo->todo_name);
+        todo = todo->ftodo;
+    }
+    printf(" }\n%s\n\n", peek_or_null(&todo_list));
+    */
+    
     test();
     test2();
-
+    
     printf("Done");
     return 0;
 }
