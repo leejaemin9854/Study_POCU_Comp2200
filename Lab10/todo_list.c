@@ -43,7 +43,7 @@ void finalize_todo_list(todo_list_t* todo_list)
     if (todo_list == NULL) {
         return;
     }
-    int i = 0;
+
     while (todo_list->todos != NULL) {
 
         if (todo_list->todos->name != NULL) {
