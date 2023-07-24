@@ -26,6 +26,7 @@ hash_index_t get_hash_position(const hashmap_t* hashmap, const char* key)
     position.pos[1] = 0;
 
     int index = (int)(hashmap->hash_func(key));
+    index %= hashmap->length;
     //int index = get_hash_key(key, hashmap->length);
     if (hashmap->plist[index] == NULL) {
         return position;
@@ -66,6 +67,7 @@ hashmap_t* init_hashmap_malloc(size_t length, unsigned int (*p_hash_func)(const 
 int add_key(hashmap_t* hashmap, const char* key, const int value)
 {
     int index = (int)(hashmap->hash_func(key));
+    index %= hashmap->length;
     //int index = get_hash_key(key, hashmap->length);
     hash_index_t position = get_hash_position(hashmap, key);
 
