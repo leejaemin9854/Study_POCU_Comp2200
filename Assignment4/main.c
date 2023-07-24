@@ -64,7 +64,7 @@ int main(void)
     }
 
     destroy(hashmap);
-    puts("Done");
+    puts("Done :D");
     return 0;
 }
 

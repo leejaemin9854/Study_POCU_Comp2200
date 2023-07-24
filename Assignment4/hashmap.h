@@ -20,8 +20,6 @@ typedef struct hash_index {
     */
 } hash_index_t;
 
-int get_hash_key(const char* key, unsigned int length);
-
 hash_index_t get_hash_position(const hashmap_t* hashmap, const char* key);
 
 hashmap_t* init_hashmap_malloc(size_t length, unsigned int (*p_hash_func)(const char* key));

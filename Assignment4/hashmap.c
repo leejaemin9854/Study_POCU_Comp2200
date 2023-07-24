@@ -5,20 +5,6 @@
 #include "node.h"
 #include "hashmap.h"
 
-int get_hash_key(const char* key, unsigned int length)
-{
-    if (key == NULL) {
-        return -1;
-    }
-
-    int value = 0;
-    while (*key != '\0') {
-        value += *key++;
-    }
-
-    return value % length;
-}
-
 hash_index_t get_hash_position(const hashmap_t* hashmap, const char* key)
 {
     hash_index_t position;
@@ -27,7 +13,7 @@ hash_index_t get_hash_position(const hashmap_t* hashmap, const char* key)
 
     int index = (int)(hashmap->hash_func(key));
     index %= hashmap->length;
-    //int index = get_hash_key(key, hashmap->length);
+
     if (hashmap->plist[index] == NULL) {
         return position;
     }
@@ -68,7 +54,7 @@ int add_key(hashmap_t* hashmap, const char* key, const int value)
 {
     int index = (int)(hashmap->hash_func(key));
     index %= hashmap->length;
-    //int index = get_hash_key(key, hashmap->length);
+
     hash_index_t position = get_hash_position(hashmap, key);
 
     if (!(position.pos[0] < 0 || position.pos[1] < 0)) {
@@ -88,7 +74,7 @@ int add_key(hashmap_t* hashmap, const char* key, const int value)
         hashmap->plist[index] = new_node;
 
     } else {
-    node_t* node = hashmap->plist[index];
+        node_t* node = hashmap->plist[index];
         while (node->next != NULL) {
             node = node->next;
         }
