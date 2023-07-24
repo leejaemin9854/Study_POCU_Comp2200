@@ -21,7 +21,6 @@ int main(void)
         int dummy = 512;
 
         sprintf(key, "key%zu", i);
-
         assert(add_key(hashmap, key, value) == TRUE);
 
         c = get_value(hashmap, key);
@@ -65,7 +64,7 @@ int main(void)
     }
 
     destroy(hashmap);
-
+    puts("Done");
     return 0;
 }
 
@@ -80,4 +79,3 @@ static unsigned int hash_function(const char* key)
 
     return code;
 }
-

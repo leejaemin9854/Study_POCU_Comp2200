@@ -20,10 +20,6 @@ typedef struct hash_index {
     */
 } hash_index_t;
 
-int is_prime(int num);
-
-int get_upper_prime_num(const int standard);
-
 int get_hash_key(const char* key, unsigned int length);
 
 hash_index_t get_hash_position(const hashmap_t* hashmap, const char* key);

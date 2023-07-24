@@ -5,32 +5,6 @@
 #include "node.h"
 #include "hashmap.h"
 
-
-int is_prime(int num)
-{
-    if (num < 2) {
-        return 0;
-    }
-
-    for (int i = 2; i <= num / 2; i++) {
-        if (num % i == 0) {
-            return 0;
-        }
-
-    }
-
-    return 1;
-}
-
-int get_upper_prime_num(const int standard)
-{
-    int prime = standard;
-
-    while (!is_prime(prime++));
-
-    return --prime;
-}
-
 int get_hash_key(const char* key, unsigned int length)
 {
     if (key == NULL) {
@@ -51,7 +25,8 @@ hash_index_t get_hash_position(const hashmap_t* hashmap, const char* key)
     position.pos[0] = -1;
     position.pos[1] = 0;
 
-    int index = get_hash_key(key, hashmap->length);
+    int index = (int)(hashmap->hash_func(key));
+    //int index = get_hash_key(key, hashmap->length);
     if (hashmap->plist[index] == NULL) {
         return position;
     }
@@ -90,7 +65,8 @@ hashmap_t* init_hashmap_malloc(size_t length, unsigned int (*p_hash_func)(const 
 
 int add_key(hashmap_t* hashmap, const char* key, const int value)
 {
-    int index = get_hash_key(key, hashmap->length);
+    int index = (int)(hashmap->hash_func(key));
+    //int index = get_hash_key(key, hashmap->length);
     hash_index_t position = get_hash_position(hashmap, key);
 
     if (!(position.pos[0] < 0 || position.pos[1] < 0)) {
