@@ -14,7 +14,10 @@ typedef struct hashmap {
 } hashmap_t;
 
 typedef struct hash_index {
-    int pos[2];//If the position is not valid, pos[0] has a value of -1, and if the connection does not exist in node*, it returns a number of negative values to the node*.
+    int pos[2];
+    /*
+    *If the position is not valid, pos[0] has a value of - 1, and if the connection does not exist in node*, it returns a number of negative values to the node* .
+    */
 } hash_index_t;
 
 int is_prime(int num);
