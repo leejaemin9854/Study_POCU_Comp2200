@@ -211,5 +211,7 @@ void destroy(hashmap_t* hashmap)
 		}
 
 	}
+	free(hashmap->plist);
+	free(hashmap);
 }
 
