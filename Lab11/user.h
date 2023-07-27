@@ -1,7 +1,7 @@
 #ifndef USER_H
 #define USER_H
 
-typedef struct user{
+typedef struct user {
 
     unsigned int id;
     char username[51];
