@@ -35,13 +35,13 @@ user_t* get_user_by_id_or_null(user_t** users_or_null, unsigned int id)
 		return NULL;
 	}
 
-	int length = _msize(users_or_null) / sizeof(user_t*);
-	
-	for (int i = 0; i < length; i++) {
+	//int length = _msize(users_or_null) / sizeof(user_t*) - 1;
+	int length = 0;
+	while (users_or_null[length] != NULL) {
+		length++;
+	}
 
-		if (users_or_null[i] == NULL) {
-			continue;
-		}
+	for (int i = 0; i < length; i++) {
 
 		if (users_or_null[i]->id == id) {
 			return users_or_null[i];
@@ -60,13 +60,13 @@ user_t* get_user_by_username_or_null(user_t** users_or_null, const char* usernam
 		return NULL;
 	}
 
-	int length = _msize(users_or_null) / sizeof(user_t*) - 1;
-	
-	for (int i = 0; i < length; i++) {
+	//int length = _msize(users_or_null) / sizeof(user_t*) - 1;
+	int length = 0;
+	while (users_or_null[length] != NULL) {
+		length++;
+	}
 
-		if (users_or_null[i] == NULL) {
-			continue;
-		}
+	for (int i = 0; i < length; i++) {
 
 		if (strcmp(users_or_null[i]->username, username) == 0) {
 			return users_or_null[i];
@@ -85,14 +85,14 @@ int update_email(user_t** users_or_null, unsigned int id, const char* email)
 		return FALSE;
 	}
 
-	int length = _msize(users_or_null) / sizeof(user_t*) - 1;
-	
+	//int length = _msize(users_or_null) / sizeof(user_t*) - 1;
+	int length = 0;
+	while (users_or_null[length] != NULL) {
+		length++;
+	}
+
 	for (int i = 0; i < length; i++) {
 		
-		if (users_or_null[i] == NULL) {
-			continue;
-		}
-
 		if (users_or_null[i]->id == id) {
 			
 			char log_record[BUFFER_SIZE];
@@ -181,13 +181,13 @@ int update_password(user_t** users_or_null, unsigned int id, const char* passwor
 		return FALSE;
 	}
 
-	int length = _msize(users_or_null) / sizeof(user_t*) - 1;
+	//int length = _msize(users_or_null) / sizeof(user_t*) - 1;
+	int length = 0;
+	while (users_or_null[length] != NULL) {
+		length++;
+	}
 
 	for (int i = 0; i < length; i++) {
-
-		if (users_or_null[i] == NULL) {
-			continue;
-		}
 
 		if (users_or_null[i]->id == id) {
 

@@ -23,10 +23,6 @@
 
 #define LOG_FILE_NAME ("log.txt")
 
-static int check_file(const char* file_name);
-
-static int record_log(const char* str);
-
 user_t* get_user_by_id_or_null(user_t** users_or_null, unsigned int id);
 
 user_t* get_user_by_username_or_null(user_t** users_or_null, const char* username);
